@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1F4535">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="하이닥터">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<style>header{padding-top:calc(env(safe-area-inset-top,0px) + var(--hp,0px))}body{padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>하이닥터 AI · 하이리빙 맞춤 상담 시스템</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 레이아웃: 상단 다크그린 띠 위로 아이보리 카드가 겹쳐 올라오는 1단 상담 흐름. 주홍은 "눌러야 할 것·1순위·강조"에만 */
+:root{
+  --green:#1F4535;      /* 다크그린 (구조: 상단 띠·대표 제품 박스) */
+  --green-2:#2E6049;    /* 그라데이션 끝 */
+  --green-ink:#1F4535;  /* 초록 글자 */
+  --green-soft:#E1ECE5; /* 연초록 (2순위 태그·선택 칩 배경) */
+  --green-tint:#F2F6F2; /* 아주 연한 초록 (패널) */
+  --ju:#E4572E;         /* 주홍 (포인트) */
+  --ju-deep:#C0421E;    /* 주홍 글자 */
+  --gold:#F3C969;       /* 어두운 박스 위 금액 */
+  --bg:#F5F3EC;         /* 아이보리 바탕 */
+  --card:#FFFFFF;
+  --field:#FBFAF6;
+  --ink:#1C2822;
+  --ink-2:#4A5A51;
+  --muted:#7F8C84;
+  --line:#E2E5DC;
+  --dark-box:#173527;
+  --on-dark:#FFFFFF;
+  --danger:#C21F4A; --danger-soft:#FDEBF0; --danger-line:#F3C7D3; --danger-ink:#7E1E37;
+  --shadow:0 14px 38px rgba(20,45,32,.10);
+  --f-display:'Gowun Batang','Noto Serif KR',serif;
+  --f-body:'Pretendard','IBM Plex Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --green:#1D3A2D; --green-2:#28513F; --green-ink:#8ED1AE; --green-soft:#24392D; --green-tint:#18251E;
+    --ju:#F06A43; --ju-deep:#FF9A72; --gold:#F3C969;
+    --bg:#101813; --card:#17221C; --field:#1C2A22; --ink:#EAF0EB; --ink-2:#C2CEC6; --muted:#8FA097; --line:#2A3A31;
+    --dark-box:#0B140F; --on-dark:#FFFFFF;
+    --danger:#FF6B8B; --danger-soft:#3A1C24; --danger-line:#5E2A38; --danger-ink:#FFC2D0;
+    --shadow:0 14px 38px rgba(0,0,0,.45); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --green:#1D3A2D; --green-2:#28513F; --green-ink:#8ED1AE; --green-soft:#24392D; --green-tint:#18251E;
+  --ju:#F06A43; --ju-deep:#FF9A72; --gold:#F3C969;
+  --bg:#101813; --card:#17221C; --field:#1C2A22; --ink:#EAF0EB; --ink-2:#C2CEC6; --muted:#8FA097; --line:#2A3A31;
+  --dark-box:#0B140F; --on-dark:#FFFFFF;
+  --danger:#FF6B8B; --danger-soft:#3A1C24; --danger-line:#5E2A38; --danger-ink:#FFC2D0;
+  --shadow:0 14px 38px rgba(0,0,0,.45); color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--f-body);color:var(--ink);line-height:1.5;
+  background:linear-gradient(165deg,var(--green) 0%,var(--green-2) 100%) top/100% 330px no-repeat, var(--bg);
+  min-height:100vh;padding:28px 16px 60px}
+.wrap{max-width:900px;margin:0 auto}
+header{text-align:center;color:var(--on-dark);margin-bottom:28px}
+.logo{display:inline-flex;align-items:center;gap:11px;font-family:var(--f-display);font-size:34px;font-weight:700;letter-spacing:-.5px}
+.logo .dot{width:34px;height:34px;border-radius:11px;background:#FFFFFF;position:relative;flex-shrink:0;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.logo .dot::before,.logo .dot::after{content:'';position:absolute;background:var(--ju);border-radius:2px;left:50%;top:50%;transform:translate(-50%,-50%)}
+.logo .dot::before{width:16px;height:5px}
+.logo .dot::after{width:5px;height:16px}
+header p{margin-top:9px;font-size:15px;opacity:.85;font-weight:500}
+.badge{display:inline-block;margin-top:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);
+  color:var(--on-dark);padding:5px 15px;border-radius:20px;font-size:12.5px;font-weight:600;letter-spacing:.2px}
+.badge::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ju);margin-right:8px;vertical-align:1px}
+.card{background:var(--card);border-radius:20px;padding:30px;box-shadow:var(--shadow);margin-bottom:18px;border:1px solid var(--line)}
+.card h2{font-family:var(--f-display);font-size:21px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;text-wrap:balance}
+.card h2 .num{font-family:var(--f-body);background:var(--green);color:var(--on-dark);width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
+#warnCard h2 .num{background:var(--danger)}
+.sub{color:var(--muted);font-size:13.5px;margin-bottom:22px}
+.row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.field{flex:1;min-width:150px}
+label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--ink-2)}
+.opt{color:var(--muted);font-weight:500}
+input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;
+  font-size:15px;font-family:inherit;background:var(--field);color:var(--ink);transition:.15s}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green-ink);background:var(--card);box-shadow:0 0 0 3px color-mix(in srgb,var(--green-ink) 16%,transparent)}
+textarea{resize:vertical;min-height:64px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:9px 16px;border:1.5px solid var(--line);border-radius:22px;font-size:14px;
+  cursor:pointer;user-select:none;background:var(--field);color:var(--ink-2);transition:.15s;font-weight:500}
+.chip:hover{border-color:var(--green-ink);color:var(--green-ink)}
+.chip.on{background:var(--green);color:var(--on-dark);border-color:var(--green);font-weight:700}
+.chip.on::before{content:'✓ ';color:var(--gold)}
+.checks{display:flex;gap:9px;flex-wrap:wrap}
+.ck{padding:9px 14px;border:1.5px solid var(--danger-line);border-radius:12px;font-size:13.5px;cursor:pointer;
+  user-select:none;background:var(--danger-soft);color:var(--danger-ink);font-weight:600;transition:.15s}
+.ck:hover{border-color:var(--danger)}
+.ck.on{background:var(--danger);color:#fff;border-color:var(--danger)}
+.btn{width:100%;padding:17px;background:var(--ju);color:#fff;border:none;
+  border-radius:14px;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:8px;transition:.15s;letter-spacing:-.2px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px color-mix(in srgb,var(--ju) 35%,transparent)}
+.btn.ghost{background:var(--green-tint);color:var(--green-ink);font-size:15px;margin-top:12px;border:1.5px solid var(--line)}
+.btn.ghost:hover{box-shadow:none;background:var(--green-soft);transform:none}
+.btn:focus-visible,.chip:focus-visible,.ck:focus-visible,.mini:focus-visible{outline:3px solid color-mix(in srgb,var(--green-ink) 45%,transparent);outline-offset:2px}
+.mini{background:none;border:none;color:var(--muted);font-size:12.5px;cursor:pointer;
+  text-decoration:underline;font-family:inherit;margin-top:14px;display:block}
+.mini:hover{color:var(--green-ink)}
+#loading{display:none;text-align:center;padding:56px 20px}
+.spinner{width:52px;height:52px;border:4px solid var(--green-soft);border-top-color:var(--ju);
+  border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 26px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}.btn:hover{transform:none}}
+.steps{max-width:350px;margin:0 auto;text-align:left}
+.step{padding:9px 0;font-size:14.5px;color:var(--muted);opacity:.55;transition:.3s;display:flex;gap:9px;align-items:center}
+.step.on{color:var(--green-ink);opacity:1;font-weight:700}
+.step .ic{width:19px}
+#result{display:none}
+.hero{background:radial-gradient(110% 140% at 100% 0%,rgba(255,255,255,.10) 0%,transparent 55%),linear-gradient(125deg,var(--green),var(--green-2));
+  color:var(--on-dark);border-radius:18px;padding:26px;margin-bottom:22px}
+.hero .lbl{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.4px;background:var(--ju);color:#fff;padding:4px 12px;border-radius:20px}
+.hero .nm{font-family:var(--f-display);font-size:30px;font-weight:700;margin:12px 0 6px;letter-spacing:-.5px;text-wrap:balance}
+.hero .tg{font-size:14px;opacity:.9;line-height:1.6}
+.hero .rs{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);font-size:14.5px;line-height:1.7}
+.hero .rs b{color:var(--gold)}
+.plist{display:flex;flex-direction:column;gap:12px}
+.pitem{padding:18px;border:1.5px solid var(--line);border-radius:15px;background:var(--field)}
+.pitem:first-child{border-color:color-mix(in srgb,var(--ju) 40%,var(--line))}
+.ptop{display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.ptag{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.t-core{background:var(--ju);color:#fff}
+.t-sub{background:var(--green);color:var(--on-dark)}
+.t-care{background:var(--green-soft);color:var(--green-ink)}
+.ptop h4{font-size:16.5px;font-weight:800;flex:1;min-width:0}
+.price{margin-left:auto;font-size:14.5px;font-weight:800;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ing{font-size:12.8px;color:var(--green-ink);font-weight:700;margin-bottom:8px;line-height:1.55}
+.fn{font-size:12.8px;color:var(--ink-2);line-height:1.65;background:var(--card);border:1px dashed var(--line);
+  border-radius:10px;padding:9px 12px;margin-bottom:8px}
+.fn b{color:var(--ink)}
+.fn.need{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
+.how{font-size:12.8px;color:var(--ink-2)}
+.total{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 18px;
+  background:var(--dark-box);color:#fff;border-radius:14px;margin-top:14px;font-size:15px;font-weight:700}
+.total b{font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}
+.warn{background:var(--danger-soft);border:1.5px solid var(--danger-line);padding:16px 18px;border-radius:12px;margin-bottom:12px}
+.warn h4{color:var(--danger);font-size:14.5px;margin-bottom:8px;font-weight:800}
+.warn li{font-size:13.5px;color:var(--danger-ink);margin-left:17px;line-height:1.7;margin-bottom:5px}
+.warn .src{font-size:11.5px;color:var(--danger-ink);opacity:.75;font-style:italic}
+.life{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.lcard{border:1.5px solid var(--line);border-radius:15px;padding:18px;background:var(--green-tint)}
+.lcard .ic{font-size:23px;margin-bottom:8px}
+.lcard h4{font-size:14.5px;font-weight:800;margin-bottom:9px;color:var(--green-ink)}
+.lcard li{font-size:13.4px;color:var(--ink-2);line-height:1.75;margin-left:16px}
+.script{background:var(--green-tint);color:var(--ink);border:1.5px solid var(--line);border-left:5px solid var(--ju);
+  border-radius:14px;padding:22px;font-size:15.5px;line-height:1.95;white-space:pre-line}
+.script .hl{color:var(--ju-deep);font-weight:800}
+.cal .crow{display:flex;gap:15px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.cal .crow:last-child{border:none}
+.cday{flex-shrink:0;width:78px;font-weight:800;color:var(--green-ink);font-size:14.5px;font-variant-numeric:tabular-nums}
+.cact{font-size:14px;color:var(--ink-2);line-height:1.6;min-width:0}
+.smemo{margin-top:14px;background:var(--card);border:1.5px dashed var(--line);border-radius:14px;padding:16px 18px;font-size:13.2px;line-height:1.75;color:var(--ink-2)}
+.smemo h5{font-size:13.5px;font-weight:800;color:var(--green-ink);margin:12px 0 6px}
+.smemo h5:first-child{margin-top:0}
+.smemo .warnline{color:var(--danger-ink);background:var(--danger-soft);border:1px solid var(--danger-line);border-radius:8px;padding:7px 10px;margin:5px 0}
+.smemo li{margin-left:17px;margin-bottom:6px}
+.smemo b{color:var(--ink)}
+.note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.75;padding-top:16px;border-top:1px solid var(--line)}
+.install{max-width:560px;margin:22px auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;text-align:left;font-size:13.5px;color:var(--ink-2);line-height:1.75}
+.install summary{cursor:pointer;padding:13px 16px;font-weight:600;color:var(--green-ink);list-style:none}
+.install summary::-webkit-details-marker{display:none}
+.install[open] summary{border-bottom:1px solid var(--line)}
+.install .ib{padding:12px 16px 14px}
+.install .ib b{color:var(--green-ink)}
+.install .ib p{margin:0 0 8px}
+.install .ib .tip{background:var(--green-tint);border-radius:10px;padding:9px 12px;margin-top:8px;font-size:12.5px}
+.install .inst-btn{display:none;margin-top:6px;background:var(--ju);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer}
+footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.8}
+@media(max-width:600px){.card{padding:22px 18px}.hero .nm{font-size:24px}.logo{font-size:29px}}
+.copybox-overlay{position:fixed;inset:0;background:rgba(8,20,14,.6);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.copybox{background:var(--card);color:var(--ink);border-radius:18px;padding:24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.copybox h3{font-size:17px;font-weight:800;margin-bottom:8px;color:var(--ink)}
+.copybox p{font-size:13.5px;color:var(--muted);margin-bottom:12px;line-height:1.65}
+.copybox textarea{width:100%;min-height:200px;padding:13px;border:1.5px solid var(--green-ink);border-radius:12px;font-size:14px;font-family:inherit;line-height:1.6;resize:vertical;background:var(--field);color:var(--ink)}
+.copybox .cbtn{margin-top:14px;display:flex;gap:10px}
+.copybox button{flex:1;padding:13px;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-family:inherit;font-size:14.5px}
+.copybox .close{background:var(--green-tint);color:var(--ink-2)}
+.copybox .retry{background:var(--ju);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo"><span class="dot"></span>하이닥터 AI</div>
+  <p>하이리빙 파트너 전용 · 맞춤 건강 상담 시스템</p>
+  <div class="badge">실제 하이리빙 주력 제품 34종 연동</div>
+</header>
+
+<div class="card" id="form">
+  <h2><span class="num">1</span>고객 정보 입력</h2>
+  <p class="sub">상담 중 들은 내용을 그대로 입력하세요. AI가 제품 조합과 안전 경고를 함께 찾아냅니다.</p>
+
+  <div class="row">
+    <div class="field"><label>고객명</label><input id="name" placeholder="예) 김영희" autocomplete="off"></div>
+    <div class="field"><label>나이</label><input id="age" type="number" placeholder="예) 57" autocomplete="off"></div>
+    <div class="field"><label>성별</label>
+      <select id="sex"><option value="여성">여성</option><option value="남성">남성</option></select></div>
+  </div>
+
+  <div style="margin-bottom:18px">
+    <label>건강 고민 <span class="opt">(복수 선택)</span></label>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="row">
+    <div class="field"><label>복용 중인 약 · 질환</label>
+      <select id="med">
+        <option value="none">없음</option>
+        <option value="warfarin">항응고제 (와파린 등)</option>
+        <option value="hyperca">고칼슘혈증</option>
+        <option value="antiplatelet">항혈소판제 (아스피린 등)</option>
+        <option value="diabetes">당뇨병 / 당뇨약</option>
+        <option value="etc">기타 의약품 복용 중</option>
+      </select></div>
+    <div class="field"><label>월 예산</label>
+      <select id="budget">
+        <option value="60000">6만원 이하</option>
+        <option value="100000">10만원 내외</option>
+        <option value="150000" selected>15만원 내외</option>
+        <option value="250000">20만원 이상</option>
+      </select></div>
+  </div>
+
+  <div style="margin-bottom:18px">
+    <label>추가 확인 <span class="opt">(해당하면 클릭)</span></label>
+    <div class="checks" id="flags"></div>
+  </div>
+
+  <div style="margin-bottom:6px">
+    <label>상담 메모 <span class="opt">(선택)</span></label>
+    <textarea id="memo" placeholder="예) 새벽에 다리에 쥐가 나서 자꾸 깬다. 작년 골밀도 검사에서 주의 소견 받음."></textarea>
+  </div>
+
+  <button class="btn" onclick="run()">🔍 AI 맞춤 처방 받기</button>
+  <button class="mini" onclick="sample()">예시 자동입력 (리허설용)</button>
+</div>
+
+<div class="card" id="loading">
+  <div class="spinner"></div>
+  <div class="steps">
+    <div class="step"><span class="ic">📋</span>고객 프로필 분석 중…</div>
+    <div class="step"><span class="ic">🧬</span>건강 고민 ↔ 기능성 원료 매칭 중…</div>
+    <div class="step"><span class="ic">📦</span>하이리빙 제품 DB 검색 중…</div>
+    <div class="step"><span class="ic">⚠️</span>제품 라벨 주의사항 대조 중…</div>
+    <div class="step"><span class="ic">📝</span>상담 스크립트 생성 중…</div>
+  </div>
+</div>
+
+<div id="result">
+  <div class="card">
+    <h2><span class="num">2</span>AI 추천 제품 조합</h2>
+    <p class="sub" id="rsub"></p>
+    <div class="hero" id="hero"></div>
+    <div class="plist" id="plist"></div>
+    <div class="total" id="total"></div>
+  </div>
+
+  <div class="card" id="warnCard">
+    <h2><span class="num">!</span>안전 체크</h2>
+    <p class="sub">하이리빙 제품 라벨의 '섭취 시 주의사항' 원문을 기준으로 자동 대조한 결과입니다.</p>
+    <div id="warns"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">3</span>라이프스타일 처방</h2>
+    <p class="sub">제품만으로는 절반입니다. 생활 습관이 결합돼야 효과가 나옵니다.</p>
+    <div class="life" id="life"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">4</span>파트너용 상담 스크립트</h2>
+    <p class="sub">고객에게 바로 읽어드릴 수 있게 AI가 문장으로 만들어 줍니다. 고객 이름과 고민이 같아도 제품과 상황에 따라 멘트가 달라지며, 아래 파트너 메모는 복사되지 않아요.</p>
+    <div class="script" id="script"></div>
+    <div class="smemo" id="smemo"></div>
+    <button class="btn ghost" onclick="copyScript()">📋 스크립트 복사</button>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">5</span>관리 캘린더</h2>
+    <p class="sub">제품별 실제 섭취 일수를 반영해 소진 시점을 계산했습니다.</p>
+    <div class="cal" id="cal"></div>
+    <button class="btn ghost" onclick="location.reload()">↺ 새 고객 상담 시작</button>
+    <p class="note" id="foot"></p>
+  </div>
+</div>
+
+<details class="install" id="install"><summary>📲 휴대폰 홈 화면에 앱처럼 추가하기</summary><div class="ib">
+<p><b>아이폰 (사파리)</b><br>아래쪽 공유 버튼(□↑) → <b>홈 화면에 추가</b> → 이름을 「하이닥터」로 바꾸고 추가</p>
+<p><b>안드로이드 (크롬)</b><br>오른쪽 위 ⋮ 메뉴 → <b>홈 화면에 추가</b> 또는 <b>앱 설치</b></p>
+<button class="inst-btn" id="instBtn" type="button">앱 설치하기</button>
+<div class="tip">카카오톡으로 받은 링크는 카톡 안에서 열리면 추가 메뉴가 안 보일 수 있어요. 오른쪽 아래 ⋮ → <b>다른 브라우저로 열기</b>(아이폰은 사파리)를 눌러 주세요.</div>
+</div></details>
+<footer>하이닥터 AI · 하이리빙 공식몰 상품정보 기반 · 주력 34종 (2026-10 가격 반영)<br>AI가 하이리빙과 만나면 — 매출 전략 ①</footer>
+</div>
+
+<script>
+/* ══════════ 실제 하이리빙 제품 데이터 ══════════ */
+const P = {
+ k2:{n:'케이2마그본',code:'101922',p:32900,days:30,vol:'1,000mg x 60정 (60g)',general:false,need:false,
+   i:'칼슘 300mg(43%), 마그네슘 150mg(48%), 비타민D 25㎍(250%), 비타민K 70㎍(100%), 망간 3mg(100%)',
+   f:'[비타민D] 칼슘과 인이 흡수되고 이용되는데 필요, 뼈의 형성과 유지에 필요, 골다공증 발생 위험 감소에 도움을 줌 / [비타민K] 정상적인 혈액응고에 필요, 뼈의 구성에 필요 / [마그네슘] 에너지 이용에 필요, 신경과 근육 기능유지에 필요 / [망간] 뼈 형성에 필요, 에너지 이용에 필요 / [칼슘] 뼈와 치아 형성에 필요, 신경과 근육 기능 유지에 필요, 골다공증 발생 위험 감소에 도움을 줌',
+   h:'1일 1회, 1회 2정을 충분한 물과 함께 (저녁 식후 권장)'},
+ epi:{n:'엔트리 애피더스혼합유산균(R)',code:'101409',p:61500,days:30,vol:'3g x 60포 (180g)',general:false,need:false,
+   i:'프로바이오틱스 4억 CFU, 프락토올리고당, 갈락토올리고당',
+   f:'유산균 증식 및 유해균 억제 · 배변활동 원활 · 장 건강에 도움을 줄 수 있음',
+   h:'1일 2회, 1회 1포(3g)를 충분한 물과 함께'},
+ winb:{n:'엔트리 애피더스 위너바이옴',code:'101974',p:51000,days:30,vol:'450mg x 30캡슐 (13.5g) · 1개월분',general:false,need:false,
+   i:'1캡슐 당 프로바이오틱스 100억 CFU 보장 · 비피더스 4X 포뮬러 + L. rhamnosus GG · 프리바이오틱스(아가베이눌린·프락토올리고당·갈락토올리고당) · 건조효모(S. boulardii) · 낙산균',
+   f:'[프로바이오틱스] 유산균 증식 및 유해균 억제 · 배변활동 원활 · 장 건강에 도움을 줄 수 있음',
+   h:'1일 1회, 1회 1캡슐을 물과 함께 · 매일 같은 시간, 미온수 또는 찬물과 함께 공복 섭취 권장 (캡슐이 어려우면 열어서 분말로 섭취 가능)'},
+ eye3:{n:'아이3케어+',code:'101930',p:98000,days:60,vol:'570mg x 60캡슐 (34.2g)',general:false,need:false,
+   i:'루테인 18.18mg + 총 지아잔틴 1.82mg(합 20mg), 아스타잔틴 12mg, 비타민A 700㎍RAE(100%), 비타민E 11mg α-TE(100%), 아연 8.5mg(100%)',
+   f:'[루테인지아잔틴복합추출물] 노화로 인해 감소될 수 있는 황반색소밀도를 유지하여 눈건강에 도움을 줄 수 있음 / [헤마토코쿠스추출물] 눈의 피로도 개선에 도움을 줄 수 있음 / [비타민A] 어두운 곳에서 시각 적응을 위해 필요 / [비타민E] 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요 / [아연] 정상적인 면역기능에 필요',
+   h:'1일 1회, 1회 1캡슐을 물과 함께 (점심 식후 권장)'},
+ keymune:{n:'엔트리 면역엔 키뮨',code:'101992',p:89000,days:30,vol:'400mg x 120캡슐 (48g) · 1개월분',general:false,need:false,
+   i:'효모베타글루칸(Wellmune) 250mg(1일 섭취량 당, 개별인정형 원료 제2013-34호) · 부원료: 키토올리고당, 식물혼합분말, 마늘추출분말, 영지자실체추출분말, 홍국분말, 차가버섯추출분말, 팽이버섯추출분말, 분리대두단백(대두·게 함유)',
+   f:'[효모베타글루칸] 면역기능 증진에 도움을 줄 수 있음',
+   h:'1일 2회, 1회 2캡슐을 식후 충분한 물과 함께 (점심 식후·저녁 식후 섭취 권장)'},
+ vc:{n:'엔트리 비타민C1000 X(엑스)',code:'101540',p:41500,days:60,vol:'1,400mg x 60정 (84g)',general:false,need:false,
+   i:'비타민C 1,000mg(1,000%) · 중성화된 비타민C(아스코르브산칼슘)',
+   f:'[비타민C] 결합조직 형성과 기능유지에 필요, 철의 흡수에 필요, 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요',
+   h:'1일 1회, 1회 1정을 물과 함께 (중성화 제형으로 공복 섭취 가능)'},
+ zinc:{n:'엔트리 헬스비아연(R)',code:'101442',p:38000,days:30,vol:'480mg x 270정 (129.6g) · 총 90회분',general:false,need:false,
+   i:'아연 2.96mg(35%)/1회 · 원료: 건조효모(아연함유), 산화아연, 효모, 밀크씨슬추출분말, 헛개나무열매농축분말, 감초추출물분말, 건조효모(셀렌함유), 옥타코사놀, 비타민B1질산염, 비타민B2 등 · 부원료에 분리대두단백(대두) 포함 · B군 함량은 라벨 사진에서 확인되지 않음',
+   f:'[아연] 정상적인 면역기능에 필요, 정상적인 세포분열에 필요',
+   h:'1일 3회, 1회 3정씩 물과 함께'},
+ pro:{n:'엔트리 프로폴리스(S)',code:'101857',p:47500,days:20,vol:'1일 6캡슐(2,400mg) · 총 20일분',general:false,need:false,
+   i:'총 플라보노이드 20mg(식약처 고시 일일섭취량), 비타민C 443mg(443%) · 호주산 프로폴리스',
+   f:'[프로폴리스추출물] 항산화에 도움을 줄 수 있음 / [비타민C] 결합조직 형성과 기능유지에 필요, 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요, 철의 흡수에 필요',
+   h:'1일 3회, 1회 2캡슐씩 물과 함께'},
+ cd:{n:'엔트리 헬시비타민C&D(R)',code:'101462',p:23000,days:0,vol:'1일 3정 (2,700mg)',general:false,need:false,
+   i:'비타민C 600mg(600%), 비타민D 10㎍(100%)',
+   f:'[비타민C] 결합조직 형성과 기능유지에 필요, 철의 흡수에 필요, 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요 / [비타민D] 칼슘과 인이 흡수되고 이용되는데 필요, 뼈의 형성과 유지에 필요, 골다공증 발생 위험 감소에 도움을 줌',
+   h:'1일 3회, 1회 1정을 씹어서'},
+ angel:{n:'엔트리 비타엔젤 (짜먹는 젤리)',code:'601440',p:30500,days:30,vol:'15g x 30포 (450g)',general:false,need:false,
+   i:'비타민B2 0.7mg(50%), 비타민B6 0.75mg(50%), 비타민D 10㎍(100%), 비타민E 3.3mg α-TE(30%), 나이아신 7.5mg NE(50%), 아연 8.5mg(100%)',
+   f:'[비타민B2] 체내 에너지 생성에 필요 / [비타민B6] 단백질 및 아미노산 이용에 필요 / [나이아신] 체내 에너지 생성에 필요 / [비타민E] 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요 / [비타민D] 뼈의 형성과 유지에 필요, 골다공증 발생 위험 감소에 도움을 줌 / [아연] 정상적인 면역기능에 필요',
+   h:'1일 1회, 1회 1포(15g)를 씹어서 (실온·냉장·냉동 가능)'},
+ saeng:{n:'하이리빙 순생식 30포',code:'601937',p:97500,days:31,vol:'40g x 31포 (1,240g)',general:true,need:false,
+   i:'생식원료 71.1% · 곡류/두류·채소/과일·해초류 등 50여 종 (동결건조)',
+   f:'※ 일반식품(생식함유제품)으로 건강기능식품 기능성 표시 대상이 아님 — 기능성 문구 사용 금지',
+   h:'1일 1~3회, 1회 1포(40g)를 생수 200~220ml에 타서 섭취 후 물 200ml 추가 섭취 권장'},
+ dang:{n:'엔트리 당밸런스 식이섬유(B)',code:'101931',p:48500,days:30,vol:'6.2g x 60포 (372g)',general:false,need:false,
+   i:'난소화성말토덱스트린식이섬유 7g (1일 섭취량 당) · 부원료: 바나나잎추출물, 치커리뿌리추출물, 오미자추출분말, 가르시니아 캄보지아 추출물, 프락토올리고당',
+   f:'[난소화성말토덱스트린] 식후 혈당 상승 억제에 도움을 줄 수 있음 / 혈중 중성지질 개선에 도움을 줄 수 있음 / 배변활동 원활에 도움을 줄 수 있음',
+   h:'1일 2회, 1회 1포 · 따뜻한 물 80ml(종이컵 절반)에 타서 충분히 저어 섭취 (식사 직후 권장, 커피맛)'},
+ meta:{n:'메타 얼라이브 3개입(N)',code:'601940',p:99000,days:0,vol:'270mg x 30매 (8.1g) x 3개입 = 총 90매 · 구강용해 필름',general:true,need:false,
+   i:'효모발효분말(NMN 50%, 미국산), 리포좀 L-글루타치온효모90, 비타민B12, 블랙베리농축액(국내산), 포도추출분말, 블루베리추출물, 퀘르세틴추출분말, 인도매자나무열매추출분말, 라임추출분말, 비타민C',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. NMN·글루타치온의 효능을 말하는 것은 표시광고법 위반이 될 수 있으니 주의하세요.',
+   h:'제품을 입안에 넣어 녹여 섭취하거나 물과 함께 섭취 (구강점막 흡수형 필름) · 권장섭취량이 규정되어 있지 않은 일반식품'},
+ esron:{n:'엔트리 에스론 우먼 골드(R)',code:'101383',p:111500,days:30,vol:'1,700mg(600mg x 2캡슐 + 500mg x 1캡슐) x 60포 (102g) · 1개월분',general:false,need:false,
+   i:'소포리코사이드 35mg(회화나무열매추출물) · 베타카로틴 0.42mg · 아연 2.55mg(30%) · 비타민D 10㎍(100%) · 비타민E 3.3mg α-TE(30%)',
+   f:'[회화나무열매추출물] 갱년기 여성의 건강에 도움을 줄 수 있음 / [비타민D] 칼슘과 인이 흡수되고 이용되는데 필요, 뼈의 형성과 유지에 필요, 골다공증 발생 위험 감소에 도움을 줌 / [아연] 정상적인 면역기능에 필요, 정상적인 세포분열에 필요 / [베타카로틴] 어두운 곳에서 시각 적응을 위해 필요, 피부와 점막을 형성하고 기능을 유지하는데 필요 / [비타민E] 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요',
+   h:'1일 2회, 1회 1포를 물과 함께 섭취'},
+ triple:{n:'엔트리 트리플엔 맥스',code:'101608',p:70000,days:30,vol:'880mg x 3정 x 30포 · 1개월분',general:false,need:false,
+   i:'비타민 14종 + 미네랄 10종 · 비타민B1 50mg, B2 24mg, B6 20mg, B12 120㎍, C 250mg, D 5㎍, E 11mg, K 120㎍(171%), 엽산 425㎍, 칼슘 226mg, 마그네슘 113mg(칼슘:마그네슘 2:1), 철 5mg, 아연 4.3mg',
+   f:'24종 각각의 기능성 인정 — [비타민B1] 탄수화물과 에너지 대사에 필요 / [비타민C] 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요 / [비타민D] 뼈의 형성과 유지에 필요 / [칼슘] 뼈와 치아 형성에 필요 / [마그네슘] 에너지 이용에 필요, 신경과 근육 기능 유지에 필요 / [철] 체내 산소운반과 혈액생성에 필요 / [아연] 정상적인 면역기능에 필요 (전체 24종 문구는 제품 라벨 참조)',
+   h:'1일 1회, 1회 1포(3정)를 충분한 물과 함께'},
+ xdito:{n:'엔트리 엑스디토(R)',code:'101586',p:89500,days:0,vol:'5.5g x 30포 (165g)',general:true,need:false,
+   i:'차전자피분말 56% 이상 · 발효소맥혼합분말(특허 10-2495386) · 락토바실러스브레비스분해추출물(특허 10-0940349) · 다시마분말 · 글루코만난 · 함초분말',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다.',
+   h:'1일 1~2회, 1회 1포(5.5g)를 충분한 물과 함께'},
+ curcu:{n:'엔트리 커큐민 C3 맥스',code:'101725',p:105000,days:60,vol:'2g x 60포 (120g) · 2개월분',general:true,need:false,
+   i:'Curcumin C3 Complex 500mg(커큐미노이드 95% 이상, SABINSA) · Bioperine(흑후추추출물) 5mg · 버섯혼합추출분말(영지·표고) · 마늘추출분말 · 도라지추출분말',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 커큐민의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1회, 1회 1포(2g)를 꼭꼭 씹어서 (쑥인절미 맛)'},
+ protein:{n:'식물성 프로틴 파우더',code:'601518',p:42500,days:14,vol:'420g (1일 3스푼 30g 기준 약 14일분)',general:true,need:false,
+   i:'단백질 21g / 3스푼 · 100% 식물성 4종(대두 57.5%, 완두 15%, 쌀 3.5%, 귀리 1%) · 필수·비필수 아미노산 14종 · BCAA(류신:발린:이소류신 = 2:1:1) · 국산 15곡 곡류효소분말',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다.',
+   h:'1일 1회, 1회 3스푼(30g)을 물 또는 우유(두유)에 혼합하여 섭취'},
+ immunepw:{n:'엔트리 이뮨파워 맥스',code:'101607',p:111500,days:30,vol:'12g x 30포 (360g) · 물에 타먹는 분말 스틱',general:false,need:false,
+   i:'비타민B1 3mg(250%) · B2 3mg(214%) · B6 3mg(200%) · 비타민C 200mg(200%) · 나이아신 30mg NE(200%) · 비오틴 600㎍(2,000%) · 아연 8.5mg(100%) · 셀렌 55㎍(100%) / 부원료 60여 종(28종 과일채소혼합분말, 타우린, 과라나추출물, L-카르니틴, 15곡 곡류혼합효소분말, 식물혼합추출물분말 TF-343 240mg, 아티초크추출분말, 포도종자추출물, 귀리식이섬유)',
+   f:'[아연] 정상적인 면역기능에 필요, 정상적인 세포분열에 필요 / [셀렌] 유해산소로부터 세포를 보호하는데 필요 / [비타민C] 결합조직 형성과 기능유지에 필요, 철의 흡수에 필요, 항산화 작용을 하여 유해산소로부터 세포를 보호하는데 필요 / [비타민B1] 탄수화물과 에너지 대사에 필요 / [비타민B2] 체내 에너지 생성에 필요 / [비타민B6] 단백질 및 아미노산 이용에 필요, 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요 / [나이아신] 체내 에너지 생성에 필요 / [비오틴] 지방, 탄수화물, 단백질 대사와 에너지 생성에 필요',
+   h:'1일 1회, 1회 1포(12g)를 물 150~180ml에 타서 완전히 녹을 때까지 흔들어 섭취 (오렌지·파인애플·망고 맛)'},
+ tesron:{n:'테스론 맨즈 골드',code:'601760',p:85500,days:30,vol:'70ml x 30포 · 1개월분',general:true,need:false,
+   i:'녹용(뉴질랜드산) 전지 사용 — 분골·상대·중대·하대 통째 · 시크릿 포뮬러 113(녹용 1 : 감초 1 : 당귀 3) · 14가지 식물혼합추출액(오가피·대추·천궁·작약·숙지황·백출·황기·비수리·복령·석창포·탱자·모과·건강·계피) · L-아르지닌 · 오르니틴 · 블랙마카추출분말 · 수박과피추출분말',
+   f:'※ 액상차(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 녹용의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1포(70ml) · 제품 라벨의 섭취방법 확인 권장'},
+ mpu:{n:'엔트리 남성 건강 맨즈 파워 업',code:'101398',p:105500,days:30,vol:'(600mg x 2정 + 500mg x 2캡슐) x 30포 (66g) · 1개월분',general:false,need:false,
+   i:'[그린타블렛] 밀크씨슬추출물(실리마린) · 테아닌(L-테아닌) · 비타민B1·B2·B6 · 판토텐산칼슘 · [레드캡슐] 쏘팔메토열매추출물 · 옥타코사놀분말 · 아연 2.55mg(30%) · 셀렌 16.5㎍(30%)',
+   f:'[밀크씨슬추출물] 간 건강에 도움을 줄 수 있음 / [테아닌] 스트레스로 인한 긴장 완화에 도움을 줄 수 있음 / [쏘팔메토열매추출물] 전립선 건강에 도움을 줄 수 있음 / [옥타코사놀함유유지] 지구력 증진에 도움을 줄 수 있음 / [아연] 정상적인 면역기능에 필요, 정상적인 세포분열에 필요 / [셀렌] 유해산소로부터 세포를 보호하는데 필요 / [비타민B1] 탄수화물과 에너지 대사에 필요 / [비타민B2] 체내 에너지 생성에 필요 / [비타민B6] 단백질 및 아미노산 이용에 필요, 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요 / [판토텐산] 지방, 탄수화물, 단백질 대사와 에너지 생성에 필요',
+   h:'1일 1회, 1회 1포(그린타블렛 2정 + 레드캡슐 2캡슐)를 충분한 물과 함께 (식후 섭취 권장)'},
+ hongsam:{n:'진홍삼 씨케이(30포)',code:'601665',p:159500,days:30,vol:'600ml (20ml x 30포)',general:true,need:false,
+   i:'홍삼농축액 7.5%(6년근, 홍삼성분 70mg/g 이상, 진세노사이드 Rg1+Rb1+Rg3 합 15mg/g, 국산) · C-K발효홍삼농축액 3% · 1포당 컴파운드-K 4mg · 진생베리농축액 · 식물혼합농축액(참당귀·산수유열매·숙지황·계피)',
+   f:'※ 홍삼음료(일반식품)입니다. 건강기능식품 기능성 문구(면역력 증진·피로개선 등)를 사용할 수 없습니다. 홍삼의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1회, 1회 1포(20ml)씩 그대로 섭취'},
+ chim:{n:'자연이 만든 명작 침향',code:'601579',p:135000,days:0,vol:'20g x 30포 (600g) · 1일 1~2포 기준 15~30일분',general:true,need:false,
+   i:'발효침향복합추출물 69%(가용성고형분 50%) · 침향(인도네시아산) 14% · 녹용(뉴질랜드산) · 홍삼농축액 · 영지버섯 · 그 외 50여 종 전통 원료 · 특허소재 식물복합물 TF-343',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 침향·녹용·홍삼·영지버섯의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1~2회, 1회 1포(20g)씩 기호에 따라 적당량 · 침전물이 생길 수 있으니 잘 흔들어서'},
+ hijin:{n:'임실가시엉겅퀴 하이진액 (30포x2세트)',code:'601224',p:208000,days:30,vol:'100ml x 30포 x 2세트 (총 60포)',general:true,need:false,
+   i:'생약추출액 99.99%(고형분 2.2% 이상) — 배합비율: 임실 가시엉겅퀴 87%(국내산), 울금(국내산), 백출(중국산), 노근, 인진쑥 · 자몽종자추출물 / 4無 첨가(합성향료·감미료·증점제·산도조절제 무첨가)',
+   f:'※ 일반식품(액상 생약추출액)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 엉겅퀴·실리마린의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1~2회, 1회 1포를 식후에 섭취 (침전물이 생길 수 있으니 흔들어서)'},
+ thistle:{n:'임실가시엉겅퀴 하루편환',code:'601651',p:92000,days:0,vol:'확인 필요',general:false,need:true,
+   i:'⚠ 상세정보가 이미지로만 제공됨 — 상세페이지 이미지 또는 제품 라벨 확인 필요',
+   f:'⚠ 상세페이지 이미지 확인 후 입력할 것',
+   h:'확인 필요'},
+ omega:{n:'엔트리 닥터 알티지 오메가-3 UP',code:'101745',p:42500,days:30,vol:'500mg x 90캡슐 (45g) · 1개월분',general:false,need:false,
+   i:'EPA + DHA 합 1,000mg (rTG형, 스페인 솔루텍스社 저온 초임계 추출) · 부형제 무첨가 · 레몬향유지',
+   f:'[EPA 및 DHA 함유 유지] 혈중 중성지질 개선·혈행 개선에 도움을 줄 수 있음 / 기억력 개선에 도움을 줄 수 있음 / 건조한 눈을 개선하여 눈 건강에 도움을 줄 수 있음',
+   h:'1일 1회, 1회 3캡슐을 물과 함께'},
+ joint:{n:'엔트리 라이트 관절초',code:'601774',p:92000,days:30,vol:'600g (20g x 30포) · 1개월분',general:false,need:false,
+   i:'구절초추출물(JoinSist, 개별인정형 제2021-12호) — 리나린 2mg · 구절초 약 2,500% 농축 · 부원료: 우슬, 육계, 감초, 복령, 오미자, MSM, N-아세틸글루코사민',
+   f:'[구절초추출물] 관절 및 연골 건강에 도움을 줄 수 있음',
+   h:'1일 1회, 1회 1포(20g) · 침전물이 생길 수 있으니 흔들어서 · 개봉 후 냉장보관'},
+ born:{n:'엔트리 라이트 본뷰티',code:'601437',p:51000,days:0,vol:'600g (20g x 30포) · 젤리 스틱',general:true,need:false,
+   i:'베리솔(VERISOL) 저분자 콜라겐 펩타이드 3,000mg (독일 젤리타社, 특허 제10-1662004호) · 엘라스틴 · 히알루론산 · 비오틴 · 비타민C · 알로에겔 · 아미노산',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 콜라겐의 피부 개선 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1~2회, 1회 1포(20g)를 씹어서 · 공복 섭취 권장 (청포도 맛)'},
+ winergy:{n:'위너지 30포',code:'601285',p:59000,days:0,vol:'15ml x 30포 (450ml)',general:true,need:false,
+   i:'백편두추출물(미얀마 마그웨이산, 특허 제10-1782848호·제10-1661145호) · 식물혼합농축액(작약·감초·참당귀·생강·계피·황기·천궁·대추·숙지황) · 배농축과즙액 · 사양벌꿀 · 복합황금추출물',
+   f:'※ 혼합음료(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다.',
+   h:'1일 1~3회, 1회 1포를 그대로 또는 물에 희석하여 · 식전 또는 식간 권장'},
+ metaact:{n:'메타 엑티브(N)',code:'601908',p:62000,days:0,vol:'50g (분말)',general:true,need:false,
+   i:'엘포틴 유산균 배양분말 L14 Complex 70%(특허 제10-2021558호) · 귀리분말 · 후코이단(국산) · 비피도박테리움 비피덤 · 동결건조 로얄젤리분말 · 전칠삼분말',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 유산균의 장 건강 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1~2회, 1회 1스푼(1g)을 입 안에서 녹인 뒤 물과 함께 (음료·요거트에 섞어도 됨)'},
+ saengq:{n:'엔트리 생생큐(R)',code:'101381',p:123500,days:60,vol:'500mg x 120캡슐 (60g) · 2개월분',general:false,need:false,
+   i:'EPA와 DHA의 합 500mg (정제어유+조류유래 DHA) · 은행잎추출물 36mg(플라보놀 배당체) · 부원료: 원지추출분말, 고투콜라(병풀)추출물분말, 당귀추출물분말, 작약추출물분말, 타우린, 난황분말, L-트립토판, L-발린, 엽산, 포도씨추출물분말',
+   f:'[은행잎추출물] 기억력 개선·혈행 개선에 도움을 줄 수 있음 / [EPA 및 DHA 함유 유지] 혈중 중성지질 개선·혈행 개선에 도움을 줄 수 있음',
+   h:'1일 1회, 1회 2캡슐을 물과 함께'},
+ superb:{n:'수퍼밸런스',code:'101883',p:83000,days:60,vol:'3g x 60포 (180g) ※ 상품필수정보에는 420g으로 표기되어 있어 확인 필요',general:true,need:false,
+   i:'HL1루피니빈발효소분말(귀리복합발효분말) 44.25% · 탄수화물 분해효소 α-아밀라아제 1,000,000 unit/3g · 단백질 분해효소 프로테아제 1,800 unit/3g · 고대곡물 루피니빈(호주산)·파로 엠머밀(이탈리아산) · 혼합유산균 3종(L.acidophilus, B.longum, S.thermophilus) · 오곡(현미·백미·보리·옥수수·검정콩·대두) · 매실·생강·파인애플추출분말',
+   f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 소화효소의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
+   h:'1일 1회, 1회 1포를 식전 또는 식후에 직접 또는 물과 함께 (식사 전 섭취 권장, 인절미 맛)'},
+ spiru:{n:'엔트리 오션스피루리나(R)',code:'601829',p:32000,days:25,vol:'250mg x 300정 (75g)',general:false,need:false,
+   i:'스피루리나(대만산) · 건조효모(셀렌 함유) 셀렌 16.5㎍(30%) · 총 엽록소 18mg · 클로렐라원말(국산) · 식물혼합분말 HE-N19',
+   f:'[스피루리나] 항산화에 도움을 줄 수 있음 / [셀렌] 유해산소로부터 세포를 보호하는데 필요',
+   h:'1일 3회, 1회 4정씩 섭취'},
+ brainps:{n:'엔트리 두뇌인지 파워액티브',code:'601960',p:79500,days:60,vol:'750mg x 120정 (90g) · 2개월분',general:false,need:false,
+   i:'포스파티딜세린(PS) 300mg(순도 80%, 1일 섭취량 100% 충족) · 비타민B12 24㎍(1,000%) · 비타민B6 7.5mg(500%) · 활성형 엽산(콰트레폴릭) 800㎍DFE(200%) · 아연 8.5mg(100%)',
+   f:'[포스파티딜세린] 기억력 개선에 도움을 줄 수 있음 / [비타민B6] 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요, 단백질 및 아미노산 이용에 필요 / [비타민B12] 정상적인 엽산대사에 필요, 신경과 적혈구의 정상 기능 유지에 필요 / [엽산] 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요, 세포와 혈액 생성에 필요 / [아연] 정상적인 면역기능에 필요',
+   h:'1일 1회, 1회 2정을 식후 물과 함께 (오전 또는 점심 식후 섭취 권장)'}
+};
+
+const CONCERNS=[
+ {id:'bone', t:'뼈·골밀도'},
+ {id:'cramp', t:'근육경련·쥐'},
+ {id:'meno', t:'갱년기'},
+ {id:'gut', t:'장 건강·배변'},
+ {id:'immune', t:'면역력'},
+ {id:'eye', t:'눈 건강'},
+ {id:'chol', t:'혈관 건강·관리'},
+ {id:'sugar', t:'식후 혈당'},
+ {id:'fatigue', t:'피로·에너지'},
+ {id:'sleep', t:'수면 관리'},
+ {id:'skin', t:'피부·항산화'},
+ {id:'meal', t:'식사대용·영양불균형'},
+ {id:'aging', t:'노화 관리 관심'},
+ {id:'protein', t:'단백질·근력 보충'},
+ {id:'men', t:'남성 건강'},
+ {id:'liver', t:'간 건강'},
+ {id:'joint', t:'관절·연골'},
+ {id:'memory', t:'기억력'}
+];
+
+const W={
+ bone: {k2:10, esron:7, triple:5, cd:4, angel:3},
+ cramp: {k2:7},
+ meno: {esron:10, k2:6},
+ gut: {winb:11, epi:10, superb:9, xdito:8, metaact:8, dang:6, saeng:5},
+ immune: {immunepw:10, keymune:9, hongsam:9, vc:8, zinc:8, pro:8, epi:7, winb:6, cd:7, esron:6, triple:6, spiru:5, angel:4},
+ eye: {eye3:10, omega:6},
+ chol: {omega:10, vc:9, triple:8, k2:7, keymune:6, saeng:5, dang:4, saengq:4},
+ sugar: {dang:10},
+ fatigue: {triple:9, winergy:8, angel:7, immunepw:7, tesron:7, hijin:7, hongsam:6, chim:6, mpu:6, vc:4},
+ sleep: {k2:10, zinc:9, omega:8, chim:7},
+ skin: {born:10, spiru:8, immunepw:6, curcu:6, vc:5, zinc:5, pro:5, esron:5, triple:4},
+ meal: {saeng:8, protein:7, superb:6, xdito:5, metaact:5},
+ aging: {curcu:8, meta:7, chim:7, brainps:6},
+ protein: {protein:10},
+ men: {tesron:10, mpu:9},
+ liver: {hijin:10, thistle:9, mpu:6, winergy:5},
+ joint: {joint:10},
+ memory: {brainps:10, saengq:9, omega:7}
+};
+
+const LIFE={
+ bone:{f:['멸치·두부·시금치 주 4회','낫토·청국장으로 비타민K 보충','짠 음식 줄이기 (칼슘 배출 촉진)'],e:['체중부하 운동 필수 — 걷기 30분 주 4회','계단 오르기, 가벼운 스쿼트 10회x3세트'],m:['햇볕 15분 산책으로 비타민D 합성 돕기']},
+ cramp:{f:['아몬드·호박씨 한 줌 매일','바나나로 칼륨 보충','카페인 오후 2시 이후 줄이기'],e:['취침 전 종아리 스트레칭 3분','발목 돌리기 좌우 20회'],m:['따뜻한 물 족욕 10분 후 취침','케이2마그본은 저녁 식후 섭취가 권장됩니다']},
+ meno:{f:['콩·두부 등 식물성 식품 챙기기','칼슘·비타민D 식품 병행','카페인·음주 줄이기'],e:['근력 운동 주 2회 — 근육이 곧 대사','요가·필라테스로 유연성 유지'],m:['호흡 명상 10분','감정 변화는 자연스러운 과정임을 인지하기']},
+ gut:{f:['식이섬유 채소 매끼','발효식품 하루 1회','물 하루 8잔 이상'],e:['식후 가벼운 산책 15분'],m:['식사 시간 규칙적으로 고정','유산균은 꾸준함이 핵심 — 최소 4주']},
+ immune:{f:['제철 과일·채소 다양하게','충분한 단백질 (계란·두부·생선)'],e:['규칙적인 중강도 운동 주 3~4회'],m:['수면 7시간 확보가 면역의 기본','과로·스트레스 관리']},
+ eye:{f:['시금치·케일 등 녹황색 채소','등푸른 생선 주 2회'],e:['20-20-20 규칙: 20분마다 20초간 먼 곳 보기'],m:['취침 1시간 전 화면 끄기','야간 운전 시 눈 피로 주의']},
+ chol:{f:['등푸른 생선 주 2회','포화지방·튀김·가공육 줄이기','채소 먼저 먹는 식사 순서'],e:['빠르게 걷기 30분 주 5회'],m:['금연·절주가 가장 큰 변수','정기적인 혈액검사로 수치 확인']},
+ sugar:{f:['채소 → 단백질 → 밥 순서로 먹기','흰쌀밥·흰빵보다 잡곡·통곡물','단 음료·과일주스 줄이기'],e:['식후 15분 가벼운 걷기가 혈당 곡선을 낮춥니다'],m:['당밸런스 식이섬유는 식사 직후 섭취가 권장됩니다','정기적으로 혈당 수치 확인']},
+ fatigue:{f:['아침에 단백질 챙기기','정제 탄수화물·설탕 줄이기'],e:['가벼운 유산소 20분 — 무리하면 역효과'],m:['낮잠은 20분 이내','주 1회 완전한 휴식일 만들기']},
+ sleep:{f:['오후 2시 이후 커피·녹차·에너지음료 줄이기','잠들기 3시간 전에는 과식·야식·음주 피하기','잎채소·견과류로 마그네슘 식품 챙기기'],e:['낮에 햇볕 쬐며 걷기 30분','격한 운동은 잠들기 3시간 전까지만'],m:['매일 같은 시간에 자고 일어나기','자기 전 1시간은 화면 줄이고 조명 낮추기','침실은 어둡고 시원하게','케이2마그본은 저녁 식후 섭취가 권장됩니다','⚠ 수면 개선은 이 제품들의 인정 기능성이 아니므로 말하면 안 됩니다']},
+ skin:{f:['비타민C 과일 매일','수분 섭취 늘리기','당분 줄이기'],e:['혈액순환을 위한 가벼운 유산소'],m:['자외선 차단 매일','스트레스 관리 명상 10분']},
+ meal:{f:['아침 결식 대신 생식·프로틴 한 잔으로 시작','섭취 후 물 200ml 추가'],e:['가벼운 아침 스트레칭으로 하루 시작'],m:['식사 시간 규칙화가 대사의 기본']},
+ aging:{f:['채소·베리류 등 항산화 식품 늘리기','가공식품·당분 줄이기'],e:['근력 운동 주 2~3회 — 근육량 유지가 핵심','유산소 주 3회'],m:['수면 7시간 확보','금연·절주','⚠ 일반식품이므로 노화 개선 효능을 말하면 안 됩니다']},
+ protein:{f:['매끼 손바닥 크기 단백질 (계란·두부·생선·살코기)','한 끼에 몰아 먹지 말고 3끼에 나눠서'],e:['근력 운동 주 2~3회 — 단백질만 먹으면 효과 없습니다','스쿼트·벽 밀기 등 집에서 가능한 운동부터'],m:['운동 후 30분~1시간 내 섭취가 효율적','충분한 수면이 근육 회복의 조건']},
+ men:{f:['아연·단백질 식품 (굴·소고기·계란)','과음·야식 줄이기'],e:['근력 운동 주 2~3회','복부 비만 관리를 위한 유산소'],m:['수면 부족은 남성 건강의 최대 적','금연·절주']},
+ liver:{f:['금주 또는 절주가 1순위','야식 줄이고 채소·과일 늘리기'],e:['규칙적 유산소로 지방간 관리','체중 관리'],m:['불필요한 약·건강기능식품 중복 복용 정리','정기 간 수치 검사']},
+ joint:{f:['체중 관리가 관절 부담과 직결됩니다','등푸른 생선·견과류 챙기기'],e:['수영·자전거 등 관절 부담 적은 운동','무릎 주변 근력 강화(벽 스쿼트)'],m:['통증 있는 날은 무리하지 않기','바른 자세 유지가 예방의 기본']},
+ memory:{f:['등푸른 생선 주 2회','베리류·견과류 챙기기','과음 줄이기'],e:['유산소 운동이 뇌 혈류를 늘립니다 — 걷기 30분'],m:['수면 7시간 확보','새로운 것을 배우는 활동(독서·악기)']}
+};
+
+/* 라벨 원문 기반 안전 규칙 */
+const RULES=[
+ {when:s=>s.med==='warfarin', hit:['k2','triple'],
+  t:'항응고제(와파린 등) 복용 중',
+  d:'케이2마그본(비타민K 70㎍)과 트리플엔 맥스(비타민K 120㎍) 라벨에 <b>"항응고제 등 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 처방 의사 확인 전에는 권하지 마세요.',
+  src:'출처: 케이2마그본 · 트리플엔 맥스 상품 필수정보'},
+ {when:s=>s.med==='hyperca'||s.med==='etc', hit:['k2','cd','angel','esron','triple'],
+  t:'고칼슘혈증 또는 의약품 복용 중',
+  d:'해당 제품 라벨에 <b>"고칼슘혈증이 있거나 의약품 복용 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다.',
+  src:'출처: 케이2마그본 · 헬시비타민C&D · 비타엔젤 · 에스론 우먼 골드 · 트리플엔 맥스 상품 필수정보'},
+ {when:s=>s.med==='warfarin'||s.med==='antiplatelet', hit:['omega','saengq'],
+  t:'항응고제·항혈소판제 복용 중 · 오메가3 / 생생큐',
+  d:'두 제품 라벨에 <b>"의약품(항응고제, 항혈소판제, 혈압강하제 등) 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 생생큐는 은행잎추출물이 들어 있어 <b>수술 전후 환자도 섭취 주의</b> 대상입니다.',
+  src:'출처: 닥터 알티지 오메가-3 UP · 엔트리 생생큐(R) 상품 필수정보'},
+ {when:s=>s.surgery, hit:'saengq',
+  t:'수술 예정 또는 직후 · 생생큐',
+  d:'라벨에 <b>"수술 전후 환자는 섭취에 주의하십시오"</b>라고 표기되어 있습니다. 은행잎추출물이 지혈에 영향을 줄 수 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 생생큐(R) 상품 필수정보', exclude:true},
+ {when:s=>s.preg, hit:'saengq',
+  t:'임신·수유 중 · 생생큐',
+  d:'라벨에 "임산부, 수유부, 어린이 및 수술 전후 환자는 섭취에 주의하십시오"라고 되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 생생큐(R) 상품 필수정보', exclude:true},
+ {when:s=>s.shell, hit:'joint',
+  t:'갑각류 알레르기 · 관절초',
+  d:'관절초의 N-아세틸글루코사민은 <b>게 유래 원료</b>입니다. 라벨에 "대두, 게 함유"로 표기되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 라이트 관절초 상품 필수정보', exclude:true},
+ {when:s=>s.preg, hit:'joint',
+  t:'임신·수유 중 · 관절초',
+  d:'라벨에 "영·유아, 어린이, 임산부 및 수유부는 섭취에 주의하십시오"라고 되어 있습니다.',
+  src:'출처: 엔트리 라이트 관절초 상품 필수정보'},
+ {when:s=>s.med!=='none', hit:'winb',
+  t:'질환 또는 의약품 복용 중 · 위너바이옴',
+  d:'위너바이옴 라벨에 <b>"질환이 있거나 의약품 복용 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다. 같은 안내가 애피더스혼합유산균에도 있으니, 복용 중인 약이 있으면 처방 의사·약사 확인을 안내하세요.',
+  src:'출처: 엔트리 애피더스 위너바이옴 상품 필수정보'},
+ {when:s=>s.med==='diabetes', hit:['triple','hongsam','chim'],
+  t:'당뇨병이 있는 고객',
+  d:'트리플엔 맥스 라벨에 <b>"당뇨병이 있는 경우 섭취 전 전문가와 상담하십시오"</b>라고 표기되어 있습니다. 홍삼 제품(진홍삼 씨케이, 홍삼농축액이 들어간 침향)도 혈당에 영향을 줄 수 있어 확인이 필요합니다.',
+  src:'출처: 트리플엔 맥스 상품 필수정보'},
+ {when:s=>s.med==='warfarin'||s.med==='antiplatelet'||s.med==='hyperca'||s.med==='etc', hit:'chim',
+  t:'복용 중인 약 · 침향',
+  d:'침향 라벨에 <b>"특정질환·알레르기 체질인 분은 원료성분을 확인 후 섭취하십시오"</b>라고 표기되어 있습니다. 녹용·홍삼·영지버섯·당귀·천궁·감초 등 50여 종 원료가 들어 있으니, 복용 중인 약이 있으면 원료표를 보여드리고 처방 의사·약사 확인을 안내하세요.',
+  src:'출처: 자연이 만든 명작 침향 상품 필수정보'},
+ {when:s=>s.preg, hit:'eye3',
+  t:'임신·수유 중 · 아이3케어+',
+  d:'라벨에 <b>"영·유아, 어린이, 임산부 및 수유부는 섭취를 피하십시오"</b>라고 명시되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 아이3케어+ 상품 필수정보', exclude:true},
+ {when:s=>s.preg, hit:'esron',
+  t:'임신·수유 중 · 에스론 우먼 골드',
+  d:'라벨에 <b>"[회화나무열매추출물] 어린이, 임산부, 수유부는 섭취에 주의하시기 바랍니다"</b>라고 되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 에스론 우먼 골드 상품 필수정보', exclude:true},
+ {when:s=>s.preg, hit:'cd',
+  t:'임신 중 · 헬시비타민C&D',
+  d:'라벨에 임산부의 경우 과민반응이 나타날 수 있으므로 섭취 전 전문가와 상담하라고 되어 있습니다.',
+  src:'출처: 엔트리 헬시비타민C&D 상품 필수정보'},
+ {when:s=>s.estro, hit:'esron',
+  t:'에스트로겐 민감 체질 · 에스론 우먼 골드',
+  d:'라벨에 <b>"에스트로겐 호르몬에 민감한 사람은 섭취에 주의하시기 바랍니다"</b>라고 명시되어 있습니다. <b>추천에서 제외했습니다.</b> 유방암·자궁내막 질환 이력이 있는 고객은 반드시 주치의 확인이 필요합니다.',
+  src:'출처: 에스론 우먼 골드 상품 필수정보', exclude:true},
+ {when:s=>s.smoke, hit:['eye3','esron','triple'],
+  t:'흡연자 (베타카로틴 함유 제품)',
+  d:'해당 제품 라벨에 <b>"흡연자는 섭취 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다.',
+  src:'출처: 아이3케어+ · 에스론 우먼 골드 · 트리플엔 맥스 상품 필수정보'},
+ {when:s=>s.shell, hit:'keymune',
+  t:'갑각류 알레르기 · 면역엔 키뮨',
+  d:'라벨 원료명에 <b>"대두, 게 함유"</b>로 표기되어 있습니다(분리대두단백 부원료). <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 면역엔 키뮨 상품 필수정보', exclude:true},
+ {when:s=>s.preg, hit:'keymune',
+  t:'임신·수유 중 · 면역엔 키뮨',
+  d:'라벨에 <b>"영·유아, 어린이, 임산부 및 수유부는 섭취를 피하십시오"</b>라고 명시되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 면역엔 키뮨 상품 필수정보', exclude:true},
+ {when:s=>s.bee, hit:'pro',
+  t:'벌 제품 알레르기 · 프로폴리스(S)',
+  d:'라벨에 "프로폴리스에 알레르기를 나타내는 사람은 섭취에 주의하십시오"라고 표기되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 프로폴리스(S) 상품 필수정보', exclude:true},
+ {when:s=>s.stomach, hit:['epi','angel','xdito','mpu'],
+  t:'위장이 약한 편',
+  d:'해당 제품 라벨에 위장장애·소화불량 증상이 있을 경우 섭취를 중단하라고 안내되어 있습니다. 특히 <b>엑스디토는 차전자피가 물을 만나 40배 팽창</b>하므로 반드시 충분한 물과 함께 드시도록 안내하세요. <b>맨즈 파워 업</b>도 설사·위통·복부팽만 등 위장관계 장애 시 섭취를 중단하라고 안내되어 있습니다.',
+  src:'출처: 애피더스혼합유산균 · 비타엔젤 · 엑스디토 · 맨즈 파워 업 상품 필수정보'},
+ {when:s=>s.preg, hit:'brainps',
+  t:'임신·수유 중 · 두뇌인지 파워액티브',
+  d:'엽산·비타민B군·아연은 임산부에게 필요한 성분이지만, Q&A에 <b>"포스파티딜세린 성분 때문에 섭취 전 주치의와 상담 후 섭취를 결정하십시오"</b>라고 안내되어 있습니다. 다른 제품과 달리 완전히 제외하지는 않았으니, 상담 시 주치의 확인을 꼭 안내해 주세요.',
+  src:'출처: 엔트리 두뇌인지 파워액티브 상품 Q&A'},
+ {when:s=>s.preg, hit:'mpu',
+  t:'임신·수유 중 · 맨즈 파워 업',
+  d:'라벨에 <b>"어린이, 임산부 및 수유부는 섭취를 피하십시오"</b>라고 명시되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 남성 건강 맨즈 파워 업 상품 필수정보', exclude:true}
+];
+const FLAGS=[['preg','임신·수유 중'],['smoke','흡연자'],['estro','에스트로겐 민감 체질'],['shell','갑각류 알레르기'],['bee','벌 제품 알레르기'],['stomach','위장이 약함'],['surgery','수술 예정·직후']];
+
+/* ══════════ UI ══════════ */
+let picked=new Set(), flags={};
+const chipBox=document.getElementById('chips');
+CONCERNS.forEach(c=>{
+  const el=document.createElement('div');
+  el.className='chip'; el.textContent=c.t; el.dataset.id=c.id;
+  el.onclick=()=>{el.classList.toggle('on'); picked.has(c.id)?picked.delete(c.id):picked.add(c.id);};
+  chipBox.appendChild(el);
+});
+const flagBox=document.getElementById('flags');
+FLAGS.forEach(([k,t])=>{
+  const el=document.createElement('div');
+  el.className='ck'; el.textContent=t; el.dataset.k=k;
+  el.onclick=()=>{el.classList.toggle('on'); flags[k]=!flags[k];};
+  flagBox.appendChild(el);
+});
+
+function sample(){
+  document.getElementById('name').value='김영희';
+  document.getElementById('age').value='57';
+  document.getElementById('sex').value='여성';
+  document.getElementById('med').value='none';
+  document.getElementById('budget').value='150000';
+  document.getElementById('memo').value='새벽에 다리에 쥐가 나서 자꾸 깬다. 작년 골밀도 검사에서 주의 소견 받음.';
+  picked=new Set(['bone','cramp','meno']);
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',picked.has(c.dataset.id)));
+}
+
+function run(){
+  if(!document.getElementById('name').value.trim()){alert('고객명을 입력해 주세요.');return;}
+  if(picked.size===0){alert('건강 고민을 하나 이상 선택해 주세요.');return;}
+  document.getElementById('form').style.display='none';
+  document.getElementById('loading').style.display='block';
+  const steps=document.querySelectorAll('.step');
+  steps.forEach(s=>s.classList.remove('on'));
+  steps.forEach((s,i)=>setTimeout(()=>{steps.forEach(x=>x.classList.remove('on'));s.classList.add('on');},i*420));
+  setTimeout(build, steps.length*420+350);
+}
+
+function build(){
+  const name=document.getElementById('name').value.trim();
+  const age=parseInt(document.getElementById('age').value)||50;
+  const sex=document.getElementById('sex').value;
+  const med=document.getElementById('med').value;
+  const budget=parseInt(document.getElementById('budget').value);
+  const memo=document.getElementById('memo').value.trim();
+  const cons=[...picked];
+  const state={med,preg:!!flags.preg,smoke:!!flags.smoke,shell:!!flags.shell,bee:!!flags.bee,stomach:!!flags.stomach};
+
+  /* 안전 규칙 먼저 — 제외 대상 결정 */
+  const fired=RULES.filter(r=>r.when(state));
+  const excluded=new Set();
+  fired.forEach(r=>{ if(r.exclude) [].concat(r.hit).forEach(k=>excluded.add(k)); });
+
+  /* 점수 계산 */
+  const score={};
+  cons.forEach(c=>{ for(const[k,v] of Object.entries(W[c]||{})) score[k]=(score[k]||0)+v; });
+  if(age>=50) score.k2=(score.k2||0)+2;
+  excluded.forEach(k=>delete score[k]);
+
+  let ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
+  if(ranked.length===0){alert('선택하신 조건에 맞는 제품이 없습니다. 고민 항목을 다시 확인해 주세요.');location.reload();return;}
+  /* 한 번에 권하는 제품은 최대 7가지(MAX_PICK). 20만원 이상(최고 구간)은 예산 제한 없이 7가지까지,
+     그 아래 구간은 예산별 개수 제한(1·2·3가지) + 예산 초과 시 낮은 순위부터 제외. */
+  const MAX_PICK = 7;
+  const isTopTier = budget>=250000;
+  const max = budget<=60000?1 : budget<=100000?2 : budget<=150000?3 : MAX_PICK;
+  let chosen=ranked.slice(0,Math.min(max,MAX_PICK));
+  const cost=a=>a.reduce((s,k)=>s+P[k].p,0);
+  if(!isTopTier){
+    while(chosen.length>1 && cost(chosen)>budget*1.1) chosen.pop();
+  }
+
+  /* 헤더 */
+  const conNames=cons.map(c=>CONCERNS.find(x=>x.id===c).t);
+  document.getElementById('rsub').textContent=`${name} 고객님 (${age}세 ${sex}) · 고민: ${conNames.join(' / ')}`;
+  const h=P[chosen[0]];
+  document.getElementById('hero').innerHTML=`
+    <div class="lbl">1순위 · 가장 먼저 권하는 제품 · 상품코드 ${h.code}</div>
+    <div class="nm">${h.n}</div>
+    <div class="tg">${h.i}</div>${h.need?'<div style="margin-top:10px;background:rgba(255,255,255,.15);border-radius:8px;padding:9px 12px;font-size:13px">⚠ 이 제품은 상세정보 확인이 필요합니다. 라벨을 보고 제품DB를 보완해 주세요.</div>':''}
+    <div class="rs">${reason(chosen[0],cons,age,sex)}</div>`;
+
+  /* 제품 카드 — 순위를 쉬운 말로 표시 (1순위, 2순위, 3순위…). 색은 1순위 진하게, 2순위 중간, 3순위부터 연하게 */
+  const tagFor=i=> [`${i+1}순위`, i===0?'t-core' : i===1?'t-sub' : 't-care'];
+  document.getElementById('plist').innerHTML=chosen.map((k,i)=>{
+    const p=P[k];
+    const tg=tagFor(i);
+    return `<div class="pitem">
+      <div class="ptop"><span class="ptag ${tg[1]}">${tg[0]}</span>
+        <h4>${p.n}</h4><span class="price">${p.p.toLocaleString()}원${p.days>0?' · '+p.days+'일분':''}</span></div>
+      <div class="ing">${p.i}</div>
+      <div class="fn${p.need?' need':''}"><b>${p.need?'⚠ 확인 필요':(p.general?'식품 유형':'식약처 인정 기능성')}</b> — ${p.f}</div>
+      <div class="how">📌 ${p.h}${p.vol?'<br>📦 '+p.vol:''}</div></div>`;
+  }).join('');
+  document.getElementById('total').innerHTML=
+    `<span>월 예상 금액 · ${chosen.length}종 패키지</span><b>${cost(chosen).toLocaleString()}원</b>`;
+
+  /* 안전 체크 */
+  const shown=fired.filter(r=>[].concat(r.hit).some(k=>chosen.includes(k)||excluded.has(k)));
+  const wc=document.getElementById('warnCard');
+  if(shown.length===0 && age<65){ wc.style.display='none'; }
+  else{
+    wc.style.display='block';
+    let html=shown.map(r=>`<div class="warn"><h4>⚠ ${r.t}</h4>
+      <li>${r.d}</li><div class="src" style="margin-left:17px">${r.src}</div></div>`).join('');
+    if(age>=65) html+=`<div class="warn"><h4>ℹ 65세 이상 고객</h4>
+      <li>여러 건강기능식품을 함께 드시면 비타민D·아연 등 성분이 중복될 수 있습니다. 기존에 드시던 제품을 먼저 확인해 주세요.</li></div>`;
+    document.getElementById('warns').innerHTML=html;
+  }
+
+  /* 라이프스타일 */
+  const f=[],e=[],m2=[];
+  cons.forEach(c=>{const L=LIFE[c]; if(!L)return; f.push(...L.f); e.push(...L.e); m2.push(...L.m);});
+  const uq=a=>[...new Set(a)].slice(0,4);
+  document.getElementById('life').innerHTML=`
+   <div class="lcard"><div class="ic">🍽️</div><h4>식습관 처방</h4><ul>${uq(f).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="lcard"><div class="ic">🏃</div><h4>운동 처방</h4><ul>${uq(e).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="lcard"><div class="ic">🧘</div><h4>휴식·명상 처방</h4><ul>${uq(m2).map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+
+  /* 스크립트 */
+  const sctx={shown,excluded,med};
+  document.getElementById('script').innerHTML=script(name,age,sex,cons,chosen,memo,sctx);
+  document.getElementById('smemo').innerHTML=scriptMemo(cons,chosen,age,sctx);
+
+  /* 캘린더 — 실제 섭취일수가 확인된 제품(days>0)만으로 소진일 계산.
+     확인 안 된 제품(0일=데이터 미비)만 있으면 30일로 안전하게 가정해 캘린더가 깨지지 않게 함. */
+  const knownDayKeys = chosen.filter(k=>P[k].days>0);
+  const minKey = knownDayKeys.length
+    ? knownDayKeys.reduce((a,b)=>P[a].days<=P[b].days?a:b)
+    : null;
+  const minD = minKey ? P[minKey].days : 30;
+
+  const cal=[
+   {d:3,  a:'첫 섭취 반응 확인 — "속은 편하셨어요?" 이탈이 가장 많은 구간'},
+   {d:14, a:'초기 변화 체크 — 작은 변화라도 기록하도록 유도'},
+   {d:30, a:'1개월 후기 확보 → 고객 동의 시 SNS 후기 콘텐츠로 활용'},
+   {d:Math.max(minD-10,7),
+    a: minKey
+      ? `가장 먼저 소진되는 <b>${P[minKey].n}</b> 재구매 안내 (소진 10일 전)`
+      : '재구매 안내 시점 — 선택된 제품의 실제 섭취일수 확인 후 정확한 날짜로 보정하세요'},
+   {d:minD, a:'소진 예정일 — 이 날짜를 넘기면 이탈 확률이 급격히 올라갑니다'},
+   {d:90, a:'3개월 결과 리뷰 + 다음 단계 제안 / 지인 소개 요청 타이밍'}
+  ];
+
+  /* 날짜순 정렬 후, 같은 날짜(D+n)가 겹치면 한 줄로 합침 */
+  cal.sort((a,b)=>a.d-b.d);
+  const merged=[];
+  cal.forEach(item=>{
+    const last=merged[merged.length-1];
+    if(last && last.d===item.d){ last.a += '<br>' + item.a; }
+    else merged.push({d:item.d, a:item.a});
+  });
+
+  document.getElementById('cal').innerHTML=merged.map(item=>
+    `<div class="crow"><div class="cday">D+${item.d}</div><div class="cact">${item.a}</div></div>`).join('');
+
+  document.getElementById('foot').innerHTML=
+    `※ 제품명·가격·원료·기능성 문구·주의사항은 하이리빙 공식몰(hiliving.co.kr) 상품 상세정보에서 2026년 7월 29일 수집한 내용입니다. 가격은 변동될 수 있습니다.<br>
+     ※ 건강기능식품은 질병의 예방 및 치료를 위한 의약품이 아닙니다. 질환이 있거나 약을 복용 중인 고객은 반드시 의사·약사와 상담하도록 안내하세요.<br>
+     ※ 본 화면의 추천은 상담 보조 도구이며 진단이나 처방이 아닙니다.`;
+
+  document.getElementById('loading').style.display='none';
+  document.getElementById('result').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function reason(key,cons,age,sex){
+  const n=cons.map(c=>CONCERNS.find(x=>x.id===c).t);
+  if(key==='k2'){
+    let s=`선택하신 <b>${n.join('·')}</b> 항목이 케이2마그본 한 제품에 함께 걸립니다. `;
+    s+=`마그네슘은 <b>신경과 근육 기능유지</b>, 비타민K와 칼슘은 <b>뼈의 구성과 형성</b>에 관여합니다. `;
+    if(age>=50&&sex==='여성') s+=`폐경 이후 여성은 골 손실 속도가 빨라져 이 조합의 우선순위가 높습니다.`;
+    return s;
+  }
+  return `선택하신 <b>${n.join('·')}</b> 항목의 적합도를 계산한 결과 <b>${P[key].n}</b>가 1순위로 나왔습니다.`;
+}
+
+/* ══════════ 상담 스크립트 ══════════ */
+/* 고민별 공감 멘트(2가지) + 확인 질문. 고객 이름·나이·고민으로 문구를 골라서, 같은 제품이어도 상담마다 말이 달라집니다. */
+const OPEN={
+ bone:{o:['뼈는 아프다고 신호를 주지 않고 조용히 약해지는 경우가 많아서, 미리 챙기시려는 마음이 제일 중요해요.','골밀도 걱정은 나이가 들수록 많아지는데, 식사·운동·영양소로 챙길 수 있는 부분이 분명한 영역이에요.'],q:'골밀도 검사는 최근에 받아 보셨어요?'},
+ cramp:{o:['밤이나 새벽에 쥐가 나면 잠까지 깨서 다음 날 컨디션이 같이 무너지죠.','쥐는 겪는 분이 정말 많아요. 미네랄 섭취와 생활 습관을 같이 보면 좋아요.'],q:'주로 언제, 어느 부위에 쥐가 나세요?'},
+ meno:{o:['갱년기에는 몸도 마음도 변화가 커서 혼자 견디시는 분이 많아요.','이 시기는 자연스러운 변화라서, 몸 상태를 살피면서 하나씩 챙기는 게 좋아요.'],q:'요즘 가장 불편하게 느끼시는 변화가 어떤 건가요?'},
+ gut:{o:['장은 매일 컨디션을 좌우해서, 편안한 날과 아닌 날의 차이가 크게 느껴지시죠.','배변 리듬이 흔들리면 하루 종일 신경이 쓰이는데, 식습관과 같이 보면 길이 보여요.'],q:'화장실은 규칙적으로 가시는 편이세요?'},
+ immune:{o:['환절기나 피곤할 때 유독 잘 지치시는 분이 많아요.','면역은 한 가지로 되는 게 아니라 영양·수면·운동이 같이 가야 해요.'],q:'요즘 감기나 피로가 자주 오는 편이세요?'},
+ eye:{o:['눈은 하루 종일 쓰는데 신경은 제일 늦게 쓰게 되는 곳이에요.','스마트폰과 화면 사용이 늘면서 눈이 피곤하다는 분이 정말 많아졌어요.'],q:'하루에 화면은 몇 시간 정도 보세요?'},
+ chol:{o:['혈관은 아프다고 말하지 않는 곳이라, 검진 수치와 생활 습관으로 미리 챙기는 게 중요해요.','혈관 관리는 한 가지가 아니라 영양소·식습관·운동을 같이 챙기는 쪽으로 가요.'],q:'최근 검진에서 혈압이나 콜레스테롤 수치는 어떠셨어요?'},
+ sugar:{o:['식후 혈당은 식사 순서와 양만 바꿔도 달라지는 부분이 있어서, 생활 습관이 먼저예요.','당 관리는 제품보다 식사 방식이 훨씬 중요한 분야예요.'],q:'식후에 졸리거나 나른해지는 일이 잦으세요?'},
+ fatigue:{o:['충분히 쉬어도 개운하지 않은 날이 이어지면 일상이 많이 무거워지죠.','피로는 수면·식사·영양이 맞물려서 오는 경우가 많아요.'],q:'피곤함이 하루 중 언제 가장 심하세요?'},
+ sleep:{o:['잠을 설치면 다음 날 컨디션 전체가 무너지니까 정말 힘드시죠.','수면은 낮 동안의 습관과 몸속 영양 균형이 같이 영향을 줘요.'],q:'잠들기가 어려우세요, 아니면 자다가 자주 깨세요?'},
+ skin:{o:['피부는 몸 상태가 가장 먼저 드러나는 곳이라 신경 쓰이실 만해요.','피부와 항산화는 안에서 챙기는 영양과 밖에서 하는 관리가 같이 가야 해요.'],q:'요즘 피부에서 제일 신경 쓰이는 부분이 어떤 건가요?'},
+ meal:{o:['식사가 불규칙하면 영양이 한쪽으로 쏠리기 쉬워요.','바쁠 때 끼니를 거르거나 대충 먹는 일, 누구나 있어요.'],q:'하루 세 끼 중 가장 자주 거르는 끼니가 어떤 거예요?'},
+ aging:{o:['나이 들수록 관리를 얼마나 일찍 시작했는지가 차이를 만든다고들 해요.','노화 관리는 한 가지 비법보다 습관의 합이라서, 지금 시작하시는 게 가장 좋아요.'],q:'요즘 가장 신경 쓰이는 변화가 어떤 부분이세요?'},
+ protein:{o:['나이가 들수록 단백질 섭취가 부족해지기 쉬워요.','근력은 식사와 운동이 같이 가야 유지돼요.'],q:'하루 식사에서 고기·생선·두부·계란은 얼마나 드세요?'},
+ men:{o:['남성 건강은 병원 가기 전까지 미루는 경우가 많아서, 미리 챙기시는 게 현명해요.','체력이나 컨디션이 예전 같지 않다는 말씀, 많이 하세요.'],q:'요즘 가장 신경 쓰이는 부분이 어떤 건가요?'},
+ liver:{o:['간은 참을성이 많아서 신호가 늦게 오는 곳이라, 미리 챙기시는 게 좋아요.','술자리나 야근이 잦으면 간 걱정이 제일 먼저 들죠.'],q:'최근 건강검진에서 간 수치는 어떠셨어요?'},
+ joint:{o:['관절은 쓰는 만큼 닳는다는 생각에 걱정이 많으시죠.','계단이나 일어설 때 불편하면 일상이 정말 달라져요.'],q:'주로 어느 관절이 불편하세요?'},
+ memory:{o:['깜빡하는 일이 늘면 신경이 쓰이는 게 당연해요.','기억력은 영양뿐 아니라 수면·운동·사람 만나는 활동이 같이 중요해요.'],q:'요즘 가장 자주 깜빡하는 게 어떤 건가요?'}
+};
+/* 제품별 한 줄 설명 — 라벨에 적힌 원료·함량·형태만 사용 (효능 표현 없음) */
+const PT={
+ k2:'칼슘 300mg과 마그네슘 150mg을 2:1로 담고, 비타민D·비타민K·망간까지 한 번에 챙기는 구성이에요.',
+ epi:'유산균 4억 CFU에 프락토올리고당, 갈락토올리고당이 같이 들어 있어요.',
+ winb:'한 캡슐에 프로바이오틱스 100억 CFU를 보장하고, 비피더스 균주 4종과 L. rhamnosus GG, 프리바이오틱스, 낙산균까지 구성했어요.',
+ eye3:'루테인과 지아잔틴 합 20mg에 아스타잔틴 12mg, 비타민A·E, 아연을 한 캡슐에 담았어요.',
+ keymune:'효모베타글루칸(Wellmune) 250mg이 핵심이고, 키토올리고당·영지·차가버섯 등이 부원료로 들어 있어요.',
+ vc:'비타민C 1,000mg을 중성화 제형으로 만들어서 공복에도 드실 수 있어요.',
+ zinc:'아연에 건조효모, 밀크씨슬추출분말, 헛개나무열매농축분말이 같이 들어 있는 제품이에요.',
+ pro:'호주산 프로폴리스에 총 플라보노이드 20mg, 비타민C 443mg이 들어 있어요.',
+ cd:'비타민C 600mg과 비타민D 10㎍을 씹어 먹는 정제로 간편하게 담았어요.',
+ angel:'짜먹는 젤리라 알약이 부담스러운 분도 편하고, 비타민B2·B6·D·E, 나이아신, 아연이 들어 있어요.',
+ saeng:'곡류·채소·과일·해초 등 50여 종 생식원료가 71.1% 들어간 동결건조 생식이에요.',
+ dang:'난소화성말토덱스트린 식이섬유 7g에 바나나잎추출물, 치커리뿌리추출물, 오미자 등이 들어 있고, 커피맛이라 식사 직후 타 드시기 좋아요.',
+ meta:'입에서 녹는 필름 형태이고, 효모발효분말(NMN 50%)과 글루타치온, 비타민B12 등이 들어 있어요.',
+ esron:'회화나무열매추출물(소포리코사이드 35mg)에 비타민D, 아연, 베타카로틴, 비타민E를 함께 담았어요.',
+ triple:'비타민 14종과 미네랄 10종, 하루 한 포(3정)로 챙기는 종합 구성이에요.',
+ xdito:'차전자피분말이 56% 이상 들어 있고, 물을 만나면 많이 불어나서 충분한 물과 함께 드셔야 해요.',
+ curcu:'커큐민 C3 콤플렉스 500mg(커큐미노이드 95% 이상)에 흑후추추출물을 더했고, 씹어 먹는 쑥인절미 맛이에요.',
+ protein:'대두·완두·쌀·귀리 100% 식물성 단백질이 3스푼에 21g 들어 있어요.',
+ immunepw:'비타민B군, 비타민C 200mg, 아연, 셀렌에 과일채소혼합분말 등 부원료 60여 종을 한 포에 담았어요.',
+ tesron:'뉴질랜드산 녹용 전지에 14가지 식물추출액, L-아르지닌, 블랙마카가 들어간 액상차예요.',
+ mpu:'밀크씨슬·테아닌·비타민B군이 든 그린타블렛과 쏘팔메토·옥타코사놀·아연·셀렌이 든 레드캡슐을 하루 한 포로 드세요.',
+ hongsam:'홍삼농축액 7.5%와 C-K발효홍삼 3%, 진생베리농축액이 들어간 20ml 파우치예요.',
+ chim:'침향나무수지가 침착된 수간목(인도네시아산) 14%에 녹용, 홍삼, 영지버섯 등 50여 종 전통 원료를 한 포에 담았어요.',
+ hijin:'임실 가시엉겅퀴 87%에 울금·백출·인진쑥을 더한 생약추출액이고, 합성향료·감미료는 넣지 않았어요.',
+ thistle:'상세 정보를 확인 중인 제품이라, 라벨을 확인한 뒤에 정확하게 안내드릴게요.',
+ omega:'EPA와 DHA 합 1,000mg을 rTG형으로 담았고, 부형제는 넣지 않았어요.',
+ joint:'구절초추출물(JoinSist, 개별인정형)에 MSM과 N-아세틸글루코사민 등이 같이 들어 있는 스틱형이에요.',
+ born:'저분자 콜라겐 펩타이드 3,000mg에 엘라스틴, 히알루론산, 비오틴, 비타민C를 젤리 스틱에 담았어요.',
+ winergy:'백편두추출물에 작약·감초·당귀 등 식물혼합농축액과 벌꿀, 배농축과즙을 넣은 음료예요.',
+ metaact:'엘포틴 유산균 배양분말 70%에 후코이단, 로얄젤리분말 등을 더한 분말이에요.',
+ saengq:'EPA·DHA 합 500mg과 은행잎추출물 36mg을 한 제품에 담았어요.',
+ superb:'루피니빈발효효소분말 44%에 소화효소와 혼합유산균 3종이 들어 있고, 식사 전에 드시는 제품이에요.',
+ spiru:'대만산 스피루리나에 건조효모, 클로렐라, 식물혼합분말이 들어 있고, 가격 부담이 낮은 편이에요.',
+ brainps:'포스파티딜세린 300mg에 비타민B12, B6, 활성형 엽산, 아연이 같이 들어 있어요.'
+};
+const HERO_INTRO=['그래서 제가 가장 먼저 권해드리고 싶은 건','오늘 상담에서 1순위로 보는 제품은','제일 먼저 챙기시면 좋겠다 싶은 건'];
+const SUB_INTRO=['같이 보시면 좋은 제품도 말씀드릴게요.','함께 챙기시면 좋은 제품은 이래요.','여기에 더해서 보시면 좋은 제품이에요.'];
+const MEMO_R=['이런 이야기를 해 주셔야 조합이 정확해져요.','나이 탓으로 넘기시는 분이 많은데, 몸이 보내는 신호인 경우도 많아요.','생활 습관과 같이 보면 훨씬 정확하게 짤 수 있어요.'];
+const CLOSE=['일단 3개월만 저랑 같이 해보시죠. 중간에 계속 체크해 드릴게요.','처음부터 다 하실 필요 없어요. 1순위로 시작해서 한 달 뒤에 같이 점검해요.','한 달 드셔 보시고 몸 상태를 같이 기록해 봐요. 3개월 단위로 조정해 드릴게요.'];
+const ASK=['오늘 어떤 걸로 시작해 보실까요?','궁금하신 점은 편하게 말씀해 주세요.','지금 드시는 약이나 영양제가 있으면 알려 주세요. 겹치는지 같이 볼게요.'];
+const CNOTE={
+ sleep:'수면 관리: 케이2마그본·헬스비아연·오메가3·침향에는 "수면 개선"으로 인정된 문구가 없습니다. "잠이 잘 온다" 같은 표현은 쓰지 말고, 라벨에 적힌 인정 기능성(마그네슘·비타민·아연 등)만 말씀하세요.',
+ chol:'혈관 건강·관리: 오메가3·생생큐는 라벨의 인정 문구(혈중 중성지질 개선·혈행 개선)만 말씀하세요. 키뮨의 인정 기능성은 면역기능 증진이며, 혈관·콜레스테롤 효능은 인정된 바 없습니다.',
+ aging:'노화 관리: "노화 개선", "젊어진다" 같은 표현은 쓸 수 없습니다.',
+ liver:'간 건강: 하이진액 등 일반식품은 간 효능을 말하면 안 됩니다.'
+};
+const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const seedOf=t=>[...String(t)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+const won=n=>Math.round(n).toLocaleString()+'원';
+const perDay=a=>Math.round(a.reduce((s,k)=>s+P[k].p/(P[k].days>0?P[k].days:30),0)/100)*100;
+
+function claimLines(p){
+  if(p.need) return '';
+  if(p.general) return '이 제품은 일반식품이라 기능성은 따로 말씀드릴 수 없어요. 대신 들어 있는 원료는 라벨 그대로 설명드릴게요.\n';
+  const segs=p.f.split(' / ').slice(0,3).map(t=>{const m=t.match(/^\[(.+?)\]\s*(.+)$/);return m?'  ▸ '+m[1]+': '+m[2]:'  ▸ '+t;});
+  return '식약처에서 인정한 기능성은 이렇습니다.\n'+segs.join('\n')+'\n';
+}
+
+function script(name,age,sex,cons,chosen,memo,ctx){
+  ctx=ctx||{};
+  const nm=esc(name);
+  const call = sex==='여성' ? (age>=55?'어머님':'선생님') : (age>=55?'아버님':'선생님');
+  const seed=seedOf(name+'|'+age+'|'+cons.join(','));
+  const pk=(arr,off)=>arr[(seed+(off||0))%arr.length];
+  const cn=id=>CONCERNS.find(x=>x.id===id).t;
+  const c1=cons[0];
+  const o1=OPEN[c1]||{o:['말씀해 주신 부분, 같이 차근차근 살펴볼게요.'],q:'가장 불편하신 점이 어떤 건가요?'};
+  const hero=P[chosen[0]];
+  let s=`"${nm} ${call}, 말씀 잘 들었어요. <span class="hl">${cn(c1)}</span> 쪽이 제일 마음에 걸리시는 거죠.\n${pk(o1.o,0)}\n${o1.q}\n\n`;
+  if(memo){
+    const m=esc(memo.length>34?memo.slice(0,34)+'…':memo);
+    s+=`말씀하신 '<span class="hl">${m}</span>' 이 부분은 놓치지 않고 챙길게요. ${pk(MEMO_R,5)}\n\n`;
+  }
+  if(cons.length>1) s+=`함께 말씀해 주신 ${cons.slice(1).map(cn).join('·')}도 같이 보면서 조합을 짰어요.\n\n`;
+
+  /* 1순위 제품 */
+  s+=`${pk(HERO_INTRO,1)} <span class="hl">${hero.n}</span>이에요.\n${PT[chosen[0]]||''}\n${claimLines(hero)}`;
+  s+=`드시는 방법은 ${hero.h}.\n${hero.days>0?hero.days+'일분이고 ':''}${won(hero.p)}입니다.\n\n`;
+
+  /* 함께 보는 제품 */
+  const subs=chosen.slice(1,4);
+  if(subs.length){
+    s+=`${pk(SUB_INTRO,2)}\n`;
+    subs.forEach(k=>{ s+=`▸ <span class="hl">${P[k].n}</span> — ${PT[k]||''} (${won(P[k].p)})\n`; });
+    if(chosen.length>4) s+=`그 외 ${chosen.length-4}가지는 상황을 보면서 단계적으로 추가하셔도 돼요.\n`;
+    s+='\n';
+  }
+
+  /* 비용 */
+  if(chosen.length>1){
+    const total=chosen.reduce((a,k)=>a+P[k].p,0);
+    s+=`전체로 보면 ${chosen.length}종에 월 ${won(total)}, 하루로 나누면 약 ${won(perDay(chosen))}꼴이에요.`;
+    if(chosen.length>2) s+=` 부담되시면 <span class="hl">1·2순위부터</span> 시작하셔도 되는데, 그러면 하루 약 ${won(perDay(chosen.slice(0,2)))}이에요.`;
+    s+='\n\n';
+  } else s+=`하루로 나누면 약 ${won(perDay(chosen))}이에요.\n\n`;
+
+  /* 안전 확인 */
+  const shown=ctx.shown||[];
+  const ex=shown.filter(r=>r.exclude), sh=shown.filter(r=>!r.exclude);
+  const hasMed=ctx.med&&ctx.med!=='none';
+  if(ex.length||sh.length||hasMed||age>=65){
+    s+='한 가지만 먼저 확인할게요. ';
+    if(hasMed) s+='지금 드시는 약이 있다고 하셨으니, 약 이름을 알려 주시면 제품 라벨과 같이 확인하고 필요하면 약사님께 여쭤보시도록 안내드릴게요. ';
+    if(age>=65) s+='이미 드시는 영양제가 있으면 먼저 알려 주세요. 비타민D나 아연처럼 겹치는 성분이 있을 수 있어요. ';
+    ex.slice(0,3).forEach(r=>{ s+=`「${r.t}」 건은 라벨 기준으로 안전을 위해 추천에서 뺐어요. `; });
+    sh.slice(0,3).forEach(r=>{ s+=`「${r.t}」 건은 라벨에 상담 안내가 있어서 같이 말씀드려요. `; });
+    s+='\n\n';
+  }
+
+  /* 생활 습관 */
+  const L=LIFE[c1];
+  if(L) s+=`그리고 제품만 믿으시면 안 돼요. ${call}께는 식습관은 "${L.f[0]}", 운동은 "${L.e[0]}"부터 권해드려요.\n\n`;
+  else s+=`그리고 제품만 믿으시면 안 돼요. ${call}께 맞는 식단이랑 운동도 같이 정리해 드릴게요.\n\n`;
+
+  /* 마무리 */
+  s+=`${pk(CLOSE,3)}\n<span class="hl">D+3</span>에 첫 반응, <span class="hl">D+14</span>에 변화를 제가 먼저 연락드려서 확인할게요.\n${pk(ASK,4)}"`;
+  return s;
+}
+
+/* 파트너 메모 — 고객에게 읽어주는 글이 아니라 상담자가 보는 참고용 (복사되지 않음) */
+function scriptMemo(cons,chosen,age,ctx){
+  const gen=chosen.filter(k=>P[k].general&&!P[k].need).map(k=>P[k].n);
+  let h='<h5>⚠ 말할 때 지켜 주세요</h5>';
+  if(gen.length) h+=`<div class="warnline">일반식품 포함 (${gen.slice(0,5).join(', ')}${gen.length>5?' 외 '+(gen.length-5)+'종':''}): 효능·효과 표현은 금지입니다. 원료·함량·맛·먹는 방법만 말씀하세요. (표시광고법)</div>`;
+  cons.forEach(c=>{ if(CNOTE[c]) h+=`<div class="warnline">${CNOTE[c]}</div>`; });
+  if(!gen.length && !cons.some(c=>CNOTE[c])) h+='<div class="warnline">건강기능식품은 라벨에 적힌 인정 기능성 문구 그대로만 말씀하세요. 질병이 낫는다는 표현은 쓸 수 없습니다.</div>';
+  const day=won(perDay(chosen));
+  h+=`<h5>💬 자주 나오는 질문, 이렇게 답하세요</h5><ul>
+   <li><b>"비싸요."</b> 하루로 나누면 약 ${day}이에요. 한꺼번에 다 하지 않고 1순위부터 시작해도 됩니다. 한 달 뒤 몸 상태를 같이 점검하고 다음 단계를 정해요.</li>
+   <li><b>"지금 약 먹는데 같이 먹어도 돼요?"</b> 약 이름을 먼저 여쭤보고, 라벨의 주의사항 기준으로 안내하세요. 판단은 처방 의사·약사에게 맡기고, 임의로 약을 줄이거나 끊게 하지 마세요.</li>
+   <li><b>"언제부터 효과 있어요?"</b> 개인차가 커서 기간을 약속드리지 않습니다. 건강기능식품은 약이 아니라서, 3개월 단위로 생활 습관과 함께 점검한다고 답하세요.</li>
+   <li><b>"다른 영양제도 먹고 있어요."</b> 비타민D·아연 등 성분이 겹칠 수 있으니 지금 드시는 제품 사진을 보내 달라고 하고 같이 정리해 주세요.</li>
+  </ul>`;
+  h+='<h5>⏱ 후속 연락</h5><ul><li>D+3: 첫 반응 확인 ("속은 편하셨어요?")</li><li>D+14: 변화 체크, 작은 변화도 기록하도록 안내</li><li>소진 10일 전: 재구매 안내</li></ul>';
+  return h;
+}
+
+function showManualCopyBox(text){
+  const old = document.querySelector('.copybox-overlay');
+  if(old) old.remove();
+  const overlay=document.createElement('div');
+  overlay.className='copybox-overlay';
+  overlay.innerHTML=`<div class="copybox">
+    <h3>📋 상담 스크립트 복사</h3>
+    <p>이 기기에서는 자동 복사가 지원되지 않아요. 아래 상자를 <b>길게 눌러 전체 선택 → 복사</b>(모바일) 또는 <b>클릭 후 Ctrl+C</b>(PC)로 복사해 주세요.</p>
+    <textarea id="manualCopyText" readonly></textarea>
+    <div class="cbtn"><button class="close" type="button">닫기</button></div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const ta=overlay.querySelector('#manualCopyText');
+  ta.value=text;
+  ta.focus();
+  ta.select();
+  try{ ta.setSelectionRange(0,text.length); }catch(e){}
+  overlay.querySelector('.close').onclick=()=>overlay.remove();
+  overlay.addEventListener('click',(e)=>{ if(e.target===overlay) overlay.remove(); });
+}
+
+function copyScript(){
+  const text = document.getElementById('script').innerText;
+  function legacyCopy(){
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=text;
+      ta.style.position='fixed';
+      ta.style.top='-9999px';
+      ta.style.left='-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok=document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }catch(e){ return false; }
+  }
+  /* 1) 최신 클립보드 API 시도 → 실패하면 2) 구형 execCommand 시도
+     → 그래도 실패하면(카카오톡 인앱 브라우저, 구형 웹뷰, 권한 차단 등 환경을 가리지 않고)
+     3) 직접 길게 눌러 복사할 수 있는 선택창을 띄워 100% 복사 가능하게 함 */
+  if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
+    navigator.clipboard.writeText(text)
+      .then(()=>alert('상담 스크립트가 복사되었습니다.'))
+      .catch(()=>{ if(legacyCopy()) alert('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text); });
+  } else {
+    if(legacyCopy()) alert('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text);
+  }
+}
+
+/* 홈 화면 설치 안내: 이미 앱으로 열려 있으면 숨기고, 안드로이드 설치 이벤트가 오면 버튼 표시 */
+(function(){
+  try{
+    var box=document.getElementById('install'); if(!box) return;
+    var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+    if(standalone){ box.style.display='none'; return; }
+    var dp=null, btn=document.getElementById('instBtn');
+    window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); dp=e; if(btn) btn.style.display='inline-block'; });
+    if(btn) btn.addEventListener('click',function(){ if(dp){ dp.prompt(); dp=null; btn.style.display='none'; } });
+  }catch(_){}
+})();
+</script>
+<script>if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+</body>
+</html>

@@ -242,7 +242,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
     <textarea id="memo" placeholder="예) 새벽에 다리에 쥐가 나서 자꾸 깬다. 작년 골밀도 검사에서 주의 소견 받음."></textarea>
   </div>
 
-  <button class="btn" onclick="run()">🔍 AI 맞춤 처방 받기</button>
+  <button class="btn" onclick="run()">🔍 AI 맞춤 추천 받기</button>
   <button class="mini" onclick="sample()">예시 자동입력 (리허설용)</button>
 </div>
 
@@ -273,7 +273,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
   </div>
 
   <div class="card">
-    <h2><span class="num">3</span>라이프스타일 처방</h2>
+    <h2><span class="num">3</span>생활습관 가이드</h2>
     <p class="sub">제품만으로는 절반입니다. 생활 습관이 결합돼야 효과가 나옵니다.</p>
     <div class="life" id="life"></div>
   </div>
@@ -721,9 +721,9 @@ function build(){
   cons.forEach(c=>{const L=LIFE[c]; if(!L)return; f.push(...L.f); e.push(...L.e); m2.push(...L.m);});
   const uq=a=>[...new Set(a)].slice(0,4);
   document.getElementById('life').innerHTML=`
-   <div class="lcard"><div class="ic">🍽️</div><h4>식습관 처방</h4><ul>${uq(f).map(x=>`<li>${x}</li>`).join('')}</ul></div>
-   <div class="lcard"><div class="ic">🏃</div><h4>운동 처방</h4><ul>${uq(e).map(x=>`<li>${x}</li>`).join('')}</ul></div>
-   <div class="lcard"><div class="ic">🧘</div><h4>휴식·명상 처방</h4><ul>${uq(m2).map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+   <div class="lcard"><div class="ic">🍽️</div><h4>식습관 가이드</h4><ul>${uq(f).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="lcard"><div class="ic">🏃</div><h4>운동 가이드</h4><ul>${uq(e).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+   <div class="lcard"><div class="ic">🧘</div><h4>휴식·명상 가이드</h4><ul>${uq(m2).map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
 
   /* 스크립트 */
   const sctx={shown,excluded,med};

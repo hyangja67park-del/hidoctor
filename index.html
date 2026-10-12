@@ -194,7 +194,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
 <header>
   <div class="logo"><span class="dot"></span>하이닥터 AI</div>
   <p>하이리빙 파트너 전용 · 맞춤 건강 상담 시스템</p>
-  <div class="badge">실제 하이리빙 주력 제품 33종 연동</div>
+  <div class="badge">실제 하이리빙 주력 제품 34종 연동</div>
 </header>
 
 <div class="card" id="form">
@@ -229,6 +229,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
         <option value="100000">10만원 내외</option>
         <option value="150000" selected>15만원 내외</option>
         <option value="250000">20만원 이상</option>
+        <option value="500000">50만원 이상</option>
       </select></div>
   </div>
 
@@ -301,7 +302,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
 <button class="inst-btn" id="instBtn" type="button">앱 설치하기</button>
 <div class="tip">카카오톡으로 받은 링크는 카톡 안에서 열리면 추가 메뉴가 안 보일 수 있어요. 오른쪽 아래 ⋮ → <b>다른 브라우저로 열기</b>(아이폰은 사파리)를 눌러 주세요.</div>
 </div></details>
-<footer>하이닥터 AI · 하이리빙 공식몰 상품정보 기반 · 주력 33종 (2026-10 가격 반영)<br>AI가 하이리빙과 만나면 — 매출 전략 ①</footer>
+<footer>하이닥터 AI · 하이리빙 공식몰 상품정보 기반 · 주력 34종 (2026-10 가격 반영)<br>AI가 하이리빙과 만나면 — 매출 전략 ①</footer>
 </div>
 
 <script>
@@ -407,6 +408,11 @@ const P = {
    i:'EPA + DHA 합 1,000mg (rTG형, 스페인 솔루텍스社 저온 초임계 추출) · 부형제 무첨가 · 레몬향유지',
    f:'[EPA 및 DHA 함유 유지] 혈중 중성지질 개선·혈행 개선에 도움을 줄 수 있음 / 기억력 개선에 도움을 줄 수 있음 / 건조한 눈을 개선하여 눈 건강에 도움을 줄 수 있음',
    h:'1일 1회, 1회 3캡슐을 물과 함께'},
+ rapha:{n:'라파 402 VIP',code:'300678',p:1540000,days:0,device:true,general:false,need:false,
+   vol:'의료용 레이저 조사기 · 3등급 의료기기 · 제조허가 제허 04-1227호 · 1회 구매 후 가정에서 계속 사용',
+   i:'레이저 402개 · 최대 출력 4.5mW · 파장 650nm · 레이저 3A등급 · AC 220V 60Hz · 소비전력 100VA · 제조: 메디펄스 주식회사(대한민국)',
+   f:'슬관절 퇴행성 관절염(골관절염) 환자에 대한 통증완화(치료)',
+   h:'전원 플러그를 꽂은 뒤 환부에 접촉 → 동작 버튼(현재 온도 표시, 45도에서 작동 제어) 또는 자동 버튼(30분 동작, 남은 시간 표시) → 사용 후 정지 버튼을 누르고 전원 플러그 제거'},
  joint:{n:'엔트리 라이트 관절초',code:'601774',p:92000,days:30,vol:'600g (20g x 30포) · 1개월분',general:false,need:false,
    i:'구절초추출물(JoinSist, 개별인정형 제2021-12호) — 리나린 2mg · 구절초 약 2,500% 농축 · 부원료: 우슬, 육계, 감초, 복령, 오미자, MSM, N-아세틸글루코사민',
    f:'[구절초추출물] 관절 및 연골 건강에 도움을 줄 수 있음',
@@ -480,7 +486,7 @@ const W={
  protein: {protein:10},
  men: {tesron:10, mpu:9},
  liver: {hijin:10, mpu:6, winergy:5},
- joint: {joint:10},
+ joint: {rapha:12, joint:10},
  memory: {brainps:10, saengq:9, omega:7},
  basic: {triple:10, omega:9, epi:8, vc:7},
  /* 남성 고객이 갱년기를 고르면 이 가중치 사용 (에스론 우먼골드는 갱년기 여성용) */
@@ -511,6 +517,10 @@ const LIFE={
 
 /* 라벨 원문 기반 안전 규칙 */
 const RULES=[
+ {when:()=>true, hit:'rapha',
+  t:'의료기기 · 라파 402 VIP',
+  d:'제품 사양표에 <b>"이 제품은 의료기기이며, 사용상의 주의사항과 사용방법을 잘 읽고 사용하십시오"</b>라고 표기되어 있습니다. 구매 전 사용상의 주의사항을 고객과 함께 확인해 주세요.',
+  src:'출처: 라파 402 VIP 제품사양'},
  {when:s=>s.med==='warfarin', hit:['k2','triple'],
   t:'항응고제(와파린 등) 복용 중',
   d:'케이2마그본(비타민K 70㎍)과 트리플엔 맥스(비타민K 120㎍) 라벨에 <b>"항응고제 등 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 처방 의사 확인 전에는 권하지 마세요.',
@@ -661,6 +671,8 @@ function build(){
   /* 50세 이상: 케이2마그본이 이미 고민에 해당할 때만 가산점 (간·건강유지 등 무관한 고민에는 끼어들지 않게) */
   if(age>=50 && score.k2) score.k2+=2;
   excluded.forEach(k=>delete score[k]);
+  /* 의료기기(라파 402 VIP, 154만원 1회 구매)는 월 예산 50만원 이상일 때만 추천 */
+  Object.keys(score).forEach(k=>{ if(P[k].device && budget<500000) delete score[k]; });
 
   let ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
   if(ranked.length===0){alert('선택하신 조건에 맞는 제품이 없습니다. 고민 항목을 다시 확인해 주세요.');location.reload();return;}
@@ -670,7 +682,7 @@ function build(){
   const isTopTier = budget>=250000;
   const max = budget<=60000?1 : budget<=100000?2 : budget<=150000?3 : MAX_PICK;
   let chosen=ranked.slice(0,Math.min(max,MAX_PICK));
-  const cost=a=>a.reduce((s,k)=>s+P[k].p,0);
+  const cost=a=>a.reduce((s,k)=>s+(P[k].device?0:P[k].p),0);  /* 월 비용 — 의료기기(1회 구매)는 제외 */
   if(!isTopTier){
     while(chosen.length>1 && cost(chosen)>budget*1.1) chosen.pop();
   }
@@ -692,13 +704,17 @@ function build(){
     const tg=tagFor(i);
     return `<div class="pitem">
       <div class="ptop"><span class="ptag ${tg[1]}">${tg[0]}</span>
-        <h4>${p.n}</h4><span class="price">${p.p.toLocaleString()}원${p.days>0?' · '+p.days+'일분':''}</span></div>
+        <h4>${p.n}</h4><span class="price">${p.p.toLocaleString()}원${p.device?' · 1회 구매':(p.days>0?' · '+p.days+'일분':'')}</span></div>
       <div class="ing">${p.i}</div>
-      <div class="fn${p.need?' need':''}"><b>${p.need?'⚠ 확인 필요':(p.general?'식품 유형':'식약처 인정 기능성')}</b> — ${p.f}</div>
-      <div class="how">📌 ${p.h}${p.vol?'<br>📦 '+p.vol:''}</div></div>`;
+      <div class="fn${p.need?' need':''}"><b>${p.need?'⚠ 확인 필요':(p.device?'의료기기 허가 사용목적':(p.general?'식품 유형':'식약처 인정 기능성'))}</b> — ${p.f}</div>
+      <div class="how">📌 ${p.device?'사용 방법: ':''}${p.h}${p.vol?'<br>📦 '+p.vol:''}</div></div>`;
   }).join('');
   document.getElementById('total').innerHTML=
-    `<span>월 예상 금액 · ${chosen.length}종 패키지</span><b>${cost(chosen).toLocaleString()}원</b>`;
+    (()=>{const dev=chosen.filter(k=>P[k].device), mon=chosen.filter(k=>!P[k].device);
+      const row=(a,b,top)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;${top?'margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18)':''}"><span>${a}</span><b style="white-space:nowrap${top!==null&&dev.includes&&a.startsWith('+')?';font-size:22px':''}">${b}</b></div>`;
+      let t=mon.length?row(`월 예상 금액 · ${mon.length}종 패키지`,cost(mon).toLocaleString()+'원',false):'';
+      dev.forEach(k=>{ t+=row(`+ 1회 구매 · ${P[k].n}<br><small style="opacity:.75">의료기기 · 월 금액과 별도</small>`,P[k].p.toLocaleString()+'원',mon.length>0); });
+      return t;})();
 
   /* 안전 체크 */
   const shown=fired.filter(r=>[].concat(r.hit).some(k=>chosen.includes(k)||excluded.has(k)));
@@ -736,7 +752,7 @@ function build(){
   const minD = minKey ? P[minKey].days : 30;
 
   const cal=[
-   {d:3,  a:'첫 섭취 반응 확인 — "속은 편하셨어요?" 이탈이 가장 많은 구간'},
+   {d:3,  a: chosen.some(k=>!P[k].device) ? '첫 섭취 반응 확인 — "속은 편하셨어요?" 이탈이 가장 많은 구간' : '첫 사용 확인 — 사용 시간·방법을 잘 따르고 계신지, 불편한 점은 없는지'},
    {d:14, a:'초기 변화 체크 — 작은 변화라도 기록하도록 유도'},
    {d:30, a:'1개월 후기 확보 → 고객 동의 시 SNS 후기 콘텐츠로 활용'},
    {d:Math.max(minD-10,7),
@@ -762,7 +778,7 @@ function build(){
   document.getElementById('foot').innerHTML=
     `※ 제품명·가격·원료·기능성 문구·주의사항은 하이리빙 공식몰(hiliving.co.kr) 상품 상세정보에서 2026년 7월 29일 수집한 내용입니다. 가격은 변동될 수 있습니다.<br>
      ※ 건강기능식품은 질병의 예방 및 치료를 위한 의약품이 아닙니다. 질환이 있거나 약을 복용 중인 고객은 반드시 의사·약사와 상담하도록 안내하세요.<br>
-     ※ 본 화면의 추천은 상담 보조 도구이며 진단이나 처방이 아닙니다.`;
+     ※ 본 화면의 추천은 상담 보조 도구이며 진단이나 처방이 아닙니다.${chosen.some(k=>P[k].device)?'<br>※ 라파 402 VIP는 의료기기(제허 04-1227호)입니다. 허가받은 사용목적 외의 효능은 말할 수 없으며, 질환 치료 중인 고객은 담당 의사와 상의하도록 안내하세요.':''}`;
 
   document.getElementById('loading').style.display='none';
   document.getElementById('result').style.display='block';
@@ -830,6 +846,7 @@ const PT={
  chim:'침향나무수지가 침착된 수간목(인도네시아산) 14%에 녹용, 홍삼, 영지버섯 등 50여 종 전통 원료를 한 포에 담았어요.',
  hijin:'임실 가시엉겅퀴 87%에 울금·백출·인진쑥을 더한 생약추출액이고, 합성향료·감미료는 넣지 않았어요.',
  omega:'EPA와 DHA 합 1,000mg을 rTG형으로 담았고, 부형제는 넣지 않았어요.',
+ rapha:'레이저 402개가 들어 있는 가정용 의료기기예요. 넓은 판을 접어서 부위에 맞게 감쌀 수 있고, 자동 버튼을 누르면 30분 동안 작동해요.',
  joint:'구절초추출물(JoinSist, 개별인정형)에 MSM과 N-아세틸글루코사민 등이 같이 들어 있는 스틱형이에요.',
  born:'저분자 콜라겐 펩타이드 3,000mg에 엘라스틴, 히알루론산, 비오틴, 비타민C를 젤리 스틱에 담았어요.',
  winergy:'백편두추출물에 작약·감초·당귀 등 식물혼합농축액과 벌꿀, 배농축과즙을 넣은 음료예요.',
@@ -849,16 +866,21 @@ const CNOTE={
  chol:'혈관 건강·관리: 오메가3·생생큐는 라벨의 인정 문구(혈중 중성지질 개선·혈행 개선)만 말씀하세요. 키뮨의 인정 기능성은 면역기능 증진이며, 혈관·콜레스테롤 효능은 인정된 바 없습니다.',
  aging:'노화 관리: "노화 개선", "젊어진다" 같은 표현은 쓸 수 없습니다.',
  liver:'간 건강: 하이진액 등 일반식품은 간 효능을 말하면 안 됩니다.',
+ joint:'관절·연골: 라파 402 VIP는 의료기기입니다. 허가받은 사용목적("슬관절 퇴행성 관절염(골관절염) 환자에 대한 통증완화(치료)") 그대로만 말씀하시고, "완치", "연골 재생", "수술 안 해도 된다" 같은 표현은 쓰지 마세요. 홍보물은 광고 심의를 받은 소재만 사용하세요. 관절초는 라벨 문구("관절 및 연골 건강에 도움을 줄 수 있음")만 말씀하세요.',
  meno:'갱년기: 에스론 우먼골드의 인정 문구는 "갱년기 여성의 건강"으로 여성 고객에게만 추천됩니다. 남성 고객에게 나오는 맨즈파워업에는 갱년기 기능성이 인정되지 않았으니 "남성 갱년기에 좋다"고 말하지 말고 라벨 기능성(전립선 건강·지구력 증진·간 건강 등)만 말씀하세요.',
  basic:'건강 유지: 트리플엔·오메가3·애피더스·비타민C는 각 라벨의 인정 문구만 말씀하세요. "이것만 먹으면 건강하다" 같은 표현은 쓸 수 없습니다.'
 };
 const esc=t=>String(t).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const seedOf=t=>[...String(t)].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+/* 받침 여부 (이에요/예요, 은/는 고르기) — 끝의 (R)·(S) 같은 괄호는 무시, 영문·숫자는 한국어 읽는 소리 기준 */
+const hasB=n=>{const t=String(n).replace(/\s*\([^)]*\)\s*$/,'').trim();const c=t[t.length-1]||'';if(/[가-힣]/.test(c))return (c.charCodeAt(0)-0xAC00)%28>0;if(/[0-9]/.test(c))return '013678'.includes(c);if(/[A-Za-z]/.test(c))return 'LMNRlmnr'.includes(c);return false;};
+const jIe=n=>hasB(n)?'이에요':'예요', jEun=n=>hasB(n)?'은':'는';
 const won=n=>Math.round(n).toLocaleString()+'원';
-const perDay=a=>Math.round(a.reduce((s,k)=>s+P[k].p/(P[k].days>0?P[k].days:30),0)/100)*100;
+const perDay=a=>Math.round(a.filter(k=>!P[k].device).reduce((s,k)=>s+P[k].p/(P[k].days>0?P[k].days:30),0)/100)*100;
 
 function claimLines(p){
   if(p.need) return '';
+  if(p.device) return '의료기기로 허가받은 사용목적은 이렇습니다.\n  ▸ '+p.f.replace(/^\[.+?\]\s*/,'')+'\n';
   if(p.general) return '이 제품은 일반식품이라 기능성은 따로 말씀드릴 수 없어요. 대신 들어 있는 원료는 라벨 그대로 설명드릴게요.\n';
   const segs=p.f.split(' / ').slice(0,3).map(t=>{const m=t.match(/^\[(.+?)\]\s*(.+)$/);return m?'  ▸ '+m[1]+': '+m[2]:'  ▸ '+t;});
   return '식약처에서 인정한 기능성은 이렇습니다.\n'+segs.join('\n')+'\n';
@@ -882,25 +904,29 @@ function script(name,age,sex,cons,chosen,memo,ctx){
   if(cons.length>1) s+=`함께 말씀해 주신 ${cons.slice(1).map(cn).join('·')}도 같이 보면서 조합을 짰어요.\n\n`;
 
   /* 1순위 제품 */
-  s+=`${pk(HERO_INTRO,1)} <span class="hl">${hero.n}</span>이에요.\n${PT[chosen[0]]||''}\n${claimLines(hero)}`;
-  s+=`드시는 방법은 ${hero.h}.\n${hero.days>0?hero.days+'일분이고 ':''}${won(hero.p)}입니다.\n\n`;
+  s+=`${pk(HERO_INTRO,1)} <span class="hl">${hero.n}</span>${jIe(hero.n)}.\n${PT[chosen[0]]||''}\n${claimLines(hero)}`;
+  if(hero.device) s+=`사용 방법은 ${hero.h}예요.\n한 번 구매하시면 가정에서 계속 쓰시는 제품이고, ${won(hero.p)}입니다.\n\n`;
+  else s+=`드시는 방법은 ${hero.h}.\n${hero.days>0?hero.days+'일분이고 ':''}${won(hero.p)}입니다.\n\n`;
 
   /* 함께 보는 제품 */
   const subs=chosen.slice(1,4);
   if(subs.length){
     s+=`${pk(SUB_INTRO,2)}\n`;
-    subs.forEach(k=>{ s+=`▸ <span class="hl">${P[k].n}</span> — ${PT[k]||''} (${won(P[k].p)})\n`; });
+    subs.forEach(k=>{ s+=`▸ <span class="hl">${P[k].n}</span> — ${PT[k]||''} (${won(P[k].p)}${P[k].device?' · 1회 구매':''})\n`; });
     if(chosen.length>4) s+=`그 외 ${chosen.length-4}가지는 상황을 보면서 단계적으로 추가하셔도 돼요.\n`;
     s+='\n';
   }
 
   /* 비용 */
-  if(chosen.length>1){
-    const total=chosen.reduce((a,k)=>a+P[k].p,0);
-    s+=`전체로 보면 ${chosen.length}종에 월 ${won(total)}, 하루로 나누면 약 ${won(perDay(chosen))}꼴이에요.`;
-    if(chosen.length>2) s+=` 부담되시면 <span class="hl">1·2순위부터</span> 시작하셔도 되는데, 그러면 하루 약 ${won(perDay(chosen.slice(0,2)))}이에요.`;
-    s+='\n\n';
-  } else s+=`하루로 나누면 약 ${won(perDay(chosen))}이에요.\n\n`;
+  const devs=chosen.filter(k=>P[k].device), mons=chosen.filter(k=>!P[k].device);
+  if(mons.length>1){
+    const total=mons.reduce((a,k)=>a+P[k].p,0);
+    s+=`${devs.length?'매달 드시는 제품만 보면 ':'전체로 보면 '}${mons.length}종에 월 ${won(total)}, 하루로 나누면 약 ${won(perDay(mons))}꼴이에요.`;
+    if(mons.length>2) s+=` 부담되시면 <span class="hl">1·2순위부터</span> 시작하셔도 되는데, 그러면 하루 약 ${won(perDay(mons.slice(0,2)))}이에요.`;
+    s+='\n';
+  } else if(mons.length===1) s+=`${P[mons[0]].n}${jEun(P[mons[0]].n)} 하루로 나누면 약 ${won(perDay(mons))}이에요.\n`;
+  if(devs.length) s+=`${devs.map(k=>P[k].n).join('·')}${jEun(P[devs[devs.length-1]].n)} 한 번 구매하는 의료기기라 월 비용과 따로 계산했어요.\n`;
+  s+='\n';
 
   /* 안전 확인 */
   const shown=ctx.shown||[];

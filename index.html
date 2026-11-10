@@ -68,33 +68,33 @@ header{text-align:center;color:var(--on-dark);margin-bottom:28px}
 .logo .dot::before,.logo .dot::after{content:'';position:absolute;background:var(--ju);border-radius:2px;left:50%;top:50%;transform:translate(-50%,-50%)}
 .logo .dot::before{width:16px;height:5px}
 .logo .dot::after{width:5px;height:16px}
-header p{margin-top:9px;font-size:15px;opacity:.85;font-weight:500}
+header p{margin-top:9px;font-size:16px;opacity:.85;font-weight:500}
 .badge{display:inline-block;margin-top:13px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);
-  color:var(--on-dark);padding:5px 15px;border-radius:20px;font-size:12.5px;font-weight:600;letter-spacing:.2px}
+  color:var(--on-dark);padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;letter-spacing:.2px}
 .badge::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ju);margin-right:8px;vertical-align:1px}
 .card{background:var(--card);border-radius:20px;padding:30px;box-shadow:var(--shadow);margin-bottom:18px;border:1px solid var(--line)}
 .card h2{font-family:var(--f-display);font-size:21px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;text-wrap:balance}
 .card h2 .num{font-family:var(--f-body);background:var(--green);color:var(--on-dark);width:28px;height:28px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
 #warnCard h2 .num{background:var(--danger)}
-.sub{color:var(--muted);font-size:13.5px;margin-bottom:22px}
+.sub{color:var(--ink-2);font-size:15.5px;margin-bottom:22px}
 .row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 .field{flex:1;min-width:150px}
-label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px;color:var(--ink-2)}
+label{display:block;font-size:15.5px;font-weight:700;margin-bottom:8px;color:var(--ink-2)}
 .opt{color:var(--muted);font-weight:500}
 input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;
-  font-size:15px;font-family:inherit;background:var(--field);color:var(--ink);transition:.15s}
+  font-size:17px;font-family:inherit;background:var(--field);color:var(--ink);transition:.15s}
 input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green-ink);background:var(--card);box-shadow:0 0 0 3px color-mix(in srgb,var(--green-ink) 16%,transparent)}
 textarea{resize:vertical;min-height:64px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:9px 16px;border:1.5px solid var(--line);border-radius:22px;font-size:14px;
+.chip{padding:11px 17px;border:1.5px solid var(--line);border-radius:24px;font-size:16.5px;
   cursor:pointer;user-select:none;background:var(--field);color:var(--ink-2);transition:.15s;font-weight:500}
 .chip:hover{border-color:var(--green-ink);color:var(--green-ink)}
 .chip.on{background:var(--green);color:var(--on-dark);border-color:var(--green);font-weight:700}
 .chip.on::before{content:'✓ ';color:var(--gold)}
 .checks{display:flex;gap:9px;flex-wrap:wrap}
-.ck{padding:9px 14px;border:1.5px solid var(--danger-line);border-radius:12px;font-size:13.5px;cursor:pointer;
+.ck{padding:11px 15px;border:1.5px solid var(--danger-line);border-radius:12px;font-size:16px;cursor:pointer;
   user-select:none;background:var(--danger-soft);color:var(--danger-ink);font-weight:600;transition:.15s}
 .ck:hover{border-color:var(--danger)}
 .ck.on{background:var(--danger);color:#fff;border-color:var(--danger)}
@@ -104,7 +104,7 @@ textarea{resize:vertical;min-height:64px}
 .btn.ghost{background:var(--green-tint);color:var(--green-ink);font-size:15px;margin-top:12px;border:1.5px solid var(--line)}
 .btn.ghost:hover{box-shadow:none;background:var(--green-soft);transform:none}
 .btn:focus-visible,.chip:focus-visible,.ck:focus-visible,.mini:focus-visible{outline:3px solid color-mix(in srgb,var(--green-ink) 45%,transparent);outline-offset:2px}
-.mini{background:none;border:none;color:var(--muted);font-size:12.5px;cursor:pointer;
+.mini{background:none;border:none;color:var(--muted);font-size:14.5px;cursor:pointer;
   text-decoration:underline;font-family:inherit;margin-top:14px;display:block}
 .mini:hover{color:var(--green-ink)}
 #loading{display:none;text-align:center;padding:56px 20px}
@@ -113,7 +113,7 @@ textarea{resize:vertical;min-height:64px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}.btn:hover{transform:none}}
 .steps{max-width:350px;margin:0 auto;text-align:left}
-.step{padding:9px 0;font-size:14.5px;color:var(--muted);opacity:.55;transition:.3s;display:flex;gap:9px;align-items:center}
+.step{padding:9px 0;font-size:16px;color:var(--muted);opacity:.55;transition:.3s;display:flex;gap:9px;align-items:center}
 .step.on{color:var(--green-ink);opacity:1;font-weight:700}
 .step .ic{width:19px}
 #result{display:none}
@@ -121,62 +121,71 @@ textarea{resize:vertical;min-height:64px}
   color:var(--on-dark);border-radius:18px;padding:26px;margin-bottom:22px}
 .hero .lbl{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.4px;background:var(--ju);color:#fff;padding:4px 12px;border-radius:20px}
 .hero .nm{font-family:var(--f-display);font-size:30px;font-weight:700;margin:12px 0 6px;letter-spacing:-.5px;text-wrap:balance}
-.hero .tg{font-size:14px;opacity:.9;line-height:1.6}
-.hero .rs{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);font-size:14.5px;line-height:1.7}
+.hero .tg{font-size:15.5px;opacity:.9;line-height:1.6}
+.hero .rs{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);font-size:16px;line-height:1.7}
 .hero .rs b{color:var(--gold)}
 .plist{display:flex;flex-direction:column;gap:12px}
 .pitem{padding:18px;border:1.5px solid var(--line);border-radius:15px;background:var(--field)}
 .pitem:first-child{border-color:color-mix(in srgb,var(--ju) 40%,var(--line))}
 .ptop{display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
-.ptag{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.ptag{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
 .t-core{background:var(--ju);color:#fff}
 .t-sub{background:var(--green);color:var(--on-dark)}
 .t-care{background:var(--green-soft);color:var(--green-ink)}
-.ptop h4{font-size:16.5px;font-weight:800;flex:1;min-width:0}
-.price{margin-left:auto;font-size:14.5px;font-weight:800;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
-.ing{font-size:12.8px;color:var(--green-ink);font-weight:700;margin-bottom:8px;line-height:1.55}
-.fn{font-size:12.8px;color:var(--ink-2);line-height:1.65;background:var(--card);border:1px dashed var(--line);
+.ptop h4{font-size:18px;font-weight:800;flex:1;min-width:0}
+.price{margin-left:auto;font-size:16px;font-weight:800;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ing{font-size:15px;color:var(--green-ink);font-weight:700;margin-bottom:8px;line-height:1.55}
+.fn{font-size:15px;color:var(--ink-2);line-height:1.65;background:var(--card);border:1px dashed var(--line);
   border-radius:10px;padding:9px 12px;margin-bottom:8px}
 .fn b{color:var(--ink)}
 .fn.need{background:var(--danger-soft);border-color:var(--danger-line);color:var(--danger-ink)}
-.how{font-size:12.8px;color:var(--ink-2)}
+.how{font-size:15px;color:var(--ink-2);line-height:1.65}
+.caut{margin-top:10px;border:1px solid var(--danger-line);border-radius:10px;background:var(--danger-soft);color:var(--danger-ink);font-size:15px;line-height:1.7}
+.caut summary{cursor:pointer;padding:10px 12px;font-weight:700;list-style:none}
+.caut summary::-webkit-details-marker{display:none}
+.caut summary::after{content:" ▾"}
+.caut[open] summary::after{content:" ▴"}
+.caut div{padding:0 12px 12px}
 .total{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 18px;
-  background:var(--dark-box);color:#fff;border-radius:14px;margin-top:14px;font-size:15px;font-weight:700}
+  background:var(--dark-box);color:#fff;border-radius:14px;margin-top:14px;font-size:16.5px;font-weight:700}
 .total b{font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}
 .warn{background:var(--danger-soft);border:1.5px solid var(--danger-line);padding:16px 18px;border-radius:12px;margin-bottom:12px}
-.warn h4{color:var(--danger);font-size:14.5px;margin-bottom:8px;font-weight:800}
-.warn li{font-size:13.5px;color:var(--danger-ink);margin-left:17px;line-height:1.7;margin-bottom:5px}
-.warn .src{font-size:11.5px;color:var(--danger-ink);opacity:.75;font-style:italic}
+.warn h4{color:var(--danger);font-size:16.5px;margin-bottom:8px;font-weight:800}
+.warn li{font-size:15.5px;color:var(--danger-ink);margin-left:17px;line-height:1.7;margin-bottom:5px}
+.warn .src{font-size:13.5px;color:var(--danger-ink);opacity:.75;font-style:italic}
 .life{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
 .lcard{border:1.5px solid var(--line);border-radius:15px;padding:18px;background:var(--green-tint)}
 .lcard .ic{font-size:23px;margin-bottom:8px}
-.lcard h4{font-size:14.5px;font-weight:800;margin-bottom:9px;color:var(--green-ink)}
-.lcard li{font-size:13.4px;color:var(--ink-2);line-height:1.75;margin-left:16px}
+.lcard h4{font-size:16.5px;font-weight:800;margin-bottom:9px;color:var(--green-ink)}
+.lcard li{font-size:15.5px;color:var(--ink-2);line-height:1.75;margin-left:16px}
 .script{background:var(--green-tint);color:var(--ink);border:1.5px solid var(--line);border-left:5px solid var(--ju);
-  border-radius:14px;padding:22px;font-size:15.5px;line-height:1.95;white-space:pre-line}
+  border-radius:14px;padding:22px;font-size:17px;line-height:1.95;white-space:pre-line}
 .script .hl{color:var(--ju-deep);font-weight:800}
 .cal .crow{display:flex;gap:15px;padding:14px 0;border-bottom:1px dashed var(--line)}
 .cal .crow:last-child{border:none}
-.cday{flex-shrink:0;width:78px;font-weight:800;color:var(--green-ink);font-size:14.5px;font-variant-numeric:tabular-nums}
-.cact{font-size:14px;color:var(--ink-2);line-height:1.6;min-width:0}
-.smemo{margin-top:14px;background:var(--card);border:1.5px dashed var(--line);border-radius:14px;padding:16px 18px;font-size:13.2px;line-height:1.75;color:var(--ink-2)}
-.smemo h5{font-size:13.5px;font-weight:800;color:var(--green-ink);margin:12px 0 6px}
+.cday{flex-shrink:0;width:108px;font-weight:800;color:var(--green-ink);font-size:17px;font-variant-numeric:tabular-nums}
+.cday small{display:block;font-size:14px;font-weight:600;color:var(--ink-2);margin-top:2px}
+.cact{font-size:16px;color:var(--ink-2);line-height:1.6;min-width:0}
+.smemo{margin-top:14px;background:var(--card);border:1.5px dashed var(--line);border-radius:14px;padding:16px 18px;font-size:15px;line-height:1.75;color:var(--ink-2)}
+.smemo h5{font-size:15.5px;font-weight:800;color:var(--green-ink);margin:12px 0 6px}
 .smemo h5:first-child{margin-top:0}
 .smemo .warnline{color:var(--danger-ink);background:var(--danger-soft);border:1px solid var(--danger-line);border-radius:8px;padding:7px 10px;margin:5px 0}
 .smemo li{margin-left:17px;margin-bottom:6px}
 .smemo b{color:var(--ink)}
-.note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.75;padding-top:16px;border-top:1px solid var(--line)}
-.install{max-width:560px;margin:22px auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;text-align:left;font-size:13.5px;color:var(--ink-2);line-height:1.75}
+.note{font-size:14px;color:var(--muted);margin-top:20px;line-height:1.75;padding-top:16px;border-top:1px solid var(--line)}
+.install{max-width:560px;margin:22px auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;text-align:left;font-size:15.5px;color:var(--ink-2);line-height:1.75}
 .install summary{cursor:pointer;padding:13px 16px;font-weight:600;color:var(--green-ink);list-style:none}
 .install summary::-webkit-details-marker{display:none}
 .install[open] summary{border-bottom:1px solid var(--line)}
 .install .ib{padding:12px 16px 14px}
 .install .ib b{color:var(--green-ink)}
 .install .ib p{margin:0 0 8px}
-.install .ib .tip{background:var(--green-tint);border-radius:10px;padding:9px 12px;margin-top:8px;font-size:12.5px}
+.install .ib .tip{background:var(--green-tint);border-radius:10px;padding:9px 12px;margin-top:8px;font-size:14.5px}
 .install .inst-btn{display:none;margin-top:6px;background:var(--ju);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer}
-footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.8}
-@media(max-width:600px){.card{padding:22px 18px}.hero .nm{font-size:24px}.logo{font-size:29px}}
+footer{text-align:center;color:var(--muted);font-size:13.5px;margin-top:26px;line-height:1.8}
+@media(max-width:600px){.price{margin-left:0;flex-basis:100%}.card{padding:22px 18px}.hero .nm{font-size:24px}.logo{font-size:29px}}
+#toast{position:fixed;left:16px;right:16px;bottom:calc(24px + env(safe-area-inset-bottom,0px));max-width:520px;margin:0 auto;background:var(--dark-box);color:#fff;padding:16px 18px;border-radius:14px;font-size:16.5px;font-weight:600;line-height:1.6;white-space:pre-line;box-shadow:0 12px 36px rgba(0,0,0,.35);z-index:10000;opacity:0;pointer-events:none;transform:translateY(12px);transition:.25s}
+#toast.on{opacity:1;transform:none}
 .copybox-overlay{position:fixed;inset:0;background:rgba(8,20,14,.6);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
 .copybox{background:var(--card);color:var(--ink);border-radius:18px;padding:24px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .copybox h3{font-size:17px;font-weight:800;margin-bottom:8px;color:var(--ink)}
@@ -214,15 +223,6 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
   </div>
 
   <div class="row">
-    <div class="field"><label>복용 중인 약 · 질환</label>
-      <select id="med">
-        <option value="none">없음</option>
-        <option value="warfarin">항응고제 (와파린 등)</option>
-        <option value="hyperca">고칼슘혈증</option>
-        <option value="antiplatelet">항혈소판제 (아스피린 등)</option>
-        <option value="diabetes">당뇨병 / 당뇨약</option>
-        <option value="etc">기타 의약품 복용 중</option>
-      </select></div>
     <div class="field"><label>월 예산</label>
       <select id="budget">
         <option value="60000">6만원 이하</option>
@@ -231,6 +231,11 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
         <option value="250000">20만원 이상</option>
         <option value="500000">50만원 이상</option>
       </select></div>
+  </div>
+
+  <div style="margin-bottom:18px">
+    <label>복용 중인 약 · 질환 <span class="opt">(해당하는 것 모두 클릭 · 없으면 그대로 두세요)</span></label>
+    <div class="checks" id="meds"></div>
   </div>
 
   <div style="margin-bottom:18px">
@@ -289,7 +294,7 @@ footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;lin
 
   <div class="card">
     <h2><span class="num">5</span>관리 캘린더</h2>
-    <p class="sub">제품별 실제 섭취 일수를 반영해 소진 시점을 계산했습니다.</p>
+    <p class="sub">제품별 실제 섭취 일수를 반영해 소진 시점을 계산했습니다. 날짜는 오늘 시작하는 경우 기준입니다.</p>
     <div class="cal" id="cal"></div>
     <button class="btn ghost" onclick="location.reload()">↺ 새 고객 상담 시작</button>
     <p class="note" id="foot"></p>
@@ -437,10 +442,10 @@ const P = {
    i:'HL1루피니빈발효소분말(귀리복합발효분말) 44.25% · 탄수화물 분해효소 α-아밀라아제 1,000,000 unit/3g · 단백질 분해효소 프로테아제 1,800 unit/3g · 고대곡물 루피니빈(호주산)·파로 엠머밀(이탈리아산) · 혼합유산균 3종(L.acidophilus, B.longum, S.thermophilus) · 오곡(현미·백미·보리·옥수수·검정콩·대두) · 매실·생강·파인애플추출분말',
    f:'※ 기타가공품(일반식품)입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다. 소화효소의 효능을 말하면 표시광고법 위반이 될 수 있습니다.',
    h:'1일 1회, 1회 1포를 식전 또는 식후에 직접 또는 물과 함께 (식사 전 섭취 권장, 인절미 맛)'},
- spiru:{n:'엔트리 오션스피루리나(R)',code:'601945',p:32000,days:25,vol:'250mg x 300정 (75g)',general:false,need:false,
+ spiru:{n:'엔트리 오션스피루리나(R)',code:'601945',p:32000,days:30,vol:'1일 6정 (1회 2정 x 3회) · 총 30일분',general:false,need:false,
    i:'스피루리나(대만산) · 건조효모(셀렌 함유) 셀렌 16.5㎍(30%) · 총 엽록소 18mg · 클로렐라원말(국산) · 식물혼합분말 HE-N19',
    f:'[스피루리나] 항산화에 도움을 줄 수 있음 / [셀렌] 유해산소로부터 세포를 보호하는데 필요',
-   h:'1일 3회, 1회 4정씩 섭취'},
+   h:'1일 3회, 1회 2정씩 물과 함께 섭취'},
  brainps:{n:'엔트리 두뇌인지 파워액티브',code:'601960',p:79500,days:60,vol:'750mg x 120정 (90g) · 2개월분',general:false,need:false,
    i:'포스파티딜세린(PS) 300mg(순도 80%, 1일 섭취량 100% 충족) · 비타민B12 24㎍(1,000%) · 비타민B6 7.5mg(500%) · 활성형 엽산(콰트레폴릭) 800㎍DFE(200%) · 아연 8.5mg(100%)',
    f:'[포스파티딜세린] 기억력 개선에 도움을 줄 수 있음 / [비타민B6] 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요, 단백질 및 아미노산 이용에 필요 / [비타민B12] 정상적인 엽산대사에 필요, 신경과 적혈구의 정상 기능 유지에 필요 / [엽산] 혈액의 호모시스테인 수준을 정상으로 유지하는데 필요, 세포와 혈액 생성에 필요 / [아연] 정상적인 면역기능에 필요',
@@ -462,6 +467,8 @@ const P = {
       String(r[12]||'').split(',').map(x=>x.trim()).filter(Boolean).forEach(c=>{ if(!bySame[c]) bySame[c]=r; });
     });
     const val=(r,i)=>{ const v=r[i]; return (v===undefined||v===null)?'':String(v).trim(); };
+    /* 원장에 딸려 들어온 브랜드·포장재 홍보 문장은 떼어 내고, "[비타민B 2 ]" 같은 띄어쓰기를 바로잡음 */
+    const clean=t=>t.replace(/\s*엔트리\s*는 나쁜 것은[\s\S]*$/,'').replace(/\s*엔트리 패키지는 친환경[\s\S]*$/,'').replace(/\[([^\]]*?)\s+(\d+)\s*\]/g,'[$1$2]').trim();
     Object.keys(P).forEach(k=>{
       const p=P[k], code=String(p.code||'').trim();
       const r=byCode[code]||bySame[code];
@@ -472,15 +479,20 @@ const P = {
       const cat=val(r,2);
       if(cat){ p.cat=cat; if(!p.device) p.general=(cat!=='건강기능식품'); }
       const price=parseInt(val(r,3).replace(/[^0-9]/g,''),10); if(price>0) p.p=price;
-      set('vol',4); set('daily',5); set('i',6); set('h',8); set('caution',9); set('url',10);
+      set('vol',4); set('daily',5); set('i',6); set('h',8); set('url',10);
+      const cau=clean(val(r,9)); if(cau) p.caution=cau;
       const st=val(r,11); if(st){ p.status=st; p.stopped=st.indexOf('판매중단')===0; }
       /* 기능성 문구: 일반식품은 원장 안내 문장만 (제품DB 문구로 대신하지 않음) */
-      const f=val(r,7);
+      const f=clean(val(r,7));
       if(p.general && !p.device) p.f = f || '※ 일반식품입니다. 건강기능식품 기능성 문구를 사용할 수 없습니다.';
       else if(f) p.f=f;
     });
   }catch(e){ console.warn('[원장] 합치기 실패 — 제품DB 값으로 동작합니다', e); }
 })();
+
+/* 오션스피루리나 리뉴얼(지니 확인 2026-11-10): 1일 6정(1회 2정 x 3회), 30일분.
+   원장 '내용량' 칸에는 리뉴얼 전 표기(1일 12정)가 남아 있어 앱에서는 이 값으로 표시. 원장이 고쳐지면 이 줄은 지워도 됨 */
+if(P.spiru){ P.spiru.vol='1일 6정 (1회 2정 x 3회) · 총 30일분'; P.spiru.daily='6정 (1회 2정 x 3회)'; P.spiru.days=30; }
 
 const CONCERNS=[
  {id:'bone', t:'뼈·골밀도'},
@@ -556,16 +568,16 @@ const RULES=[
   t:'의료기기 · 라파 402 VIP',
   d:'제품 사양표에 <b>"이 제품은 의료기기이며, 사용상의 주의사항과 사용방법을 잘 읽고 사용하십시오"</b>라고 표기되어 있습니다. 구매 전 사용상의 주의사항을 고객과 함께 확인해 주세요.',
   src:'출처: 라파 402 VIP 제품사양'},
- {when:s=>s.med==='warfarin', hit:['k2','triple'],
+ {when:s=>s.warfarin, hit:['k2','triple'],
   t:'항응고제(와파린 등) 복용 중',
-  d:'케이2마그본(비타민K 70㎍)과 트리플엔 맥스(비타민K 120㎍) 라벨에 <b>"항응고제 등 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 처방 의사 확인 전에는 권하지 마세요.',
-  src:'출처: 케이2마그본 · 트리플엔 맥스 상품 필수정보'},
- {when:s=>s.med==='hyperca'||s.med==='etc', hit:['k2','cd','angel','esron','triple'],
+  d:'케이2마그본(비타민K 70㎍)과 트리플엔 맥스(비타민K 120㎍) 라벨에 <b>"항응고제 등 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 비타민K는 와파린 등 항응고제의 작용에 영향을 줄 수 있어 <b>추천에서 제외했습니다.</b> 처방 의사가 괜찮다고 확인해 준 뒤에만 다시 권하세요.',
+  src:'출처: 케이2마그본 · 트리플엔 맥스 상품 필수정보', exclude:true},
+ {when:s=>s.hyperca||s.drug, hit:['k2','cd','angel','esron','triple'],
   t:'고칼슘혈증 또는 의약품 복용 중',
   d:'해당 제품 라벨에 <b>"고칼슘혈증이 있거나 의약품 복용 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다.',
   src:'출처: 케이2마그본 · 헬시비타민C&D · 비타엔젤 · 에스론 우먼 골드 · 트리플엔 맥스 상품 필수정보'},
- {when:s=>s.med==='warfarin'||s.med==='antiplatelet', hit:['omega','saengq'],
-  t:'항응고제·항혈소판제 복용 중 · 오메가3 / 생생큐',
+ {when:s=>s.warfarin||s.antiplatelet||s.bp||s.etc, hit:['omega','saengq'],
+  t:'항응고제·항혈소판제·혈압약 등 복용 중 · 오메가3 / 생생큐',
   d:'두 제품 라벨에 <b>"의약품(항응고제, 항혈소판제, 혈압강하제 등) 복용 시 전문가와 상담하십시오"</b>라고 명시되어 있습니다. 생생큐는 은행잎추출물이 들어 있어 <b>수술 전후 환자도 섭취 주의</b> 대상입니다.',
   src:'출처: 닥터 알티지 오메가-3 UP · 엔트리 생생큐(R) 상품 필수정보'},
  {when:s=>s.surgery, hit:'saengq',
@@ -584,15 +596,15 @@ const RULES=[
   t:'임신·수유 중 · 관절초',
   d:'라벨에 "영·유아, 어린이, 임산부 및 수유부는 섭취에 주의하십시오"라고 되어 있습니다.',
   src:'출처: 엔트리 라이트 관절초 상품 필수정보'},
- {when:s=>s.med!=='none', hit:'winb',
-  t:'질환 또는 의약품 복용 중 · 위너바이옴',
+ {when:s=>s.anyMed, hit:['winb','epi'],
+  t:'질환 또는 의약품 복용 중 · 유산균 제품',
   d:'위너바이옴 라벨에 <b>"질환이 있거나 의약품 복용 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다. 같은 안내가 애피더스혼합유산균에도 있으니, 복용 중인 약이 있으면 처방 의사·약사 확인을 안내하세요.',
-  src:'출처: 엔트리 애피더스 위너바이옴 상품 필수정보'},
- {when:s=>s.med==='diabetes', hit:['triple','hongsam','chim'],
+  src:'출처: 애피더스 위너바이옴 · 애피더스혼합유산균 상품 필수정보'},
+ {when:s=>s.diabetes, hit:['triple','hongsam','chim'],
   t:'당뇨병이 있는 고객',
   d:'트리플엔 맥스 라벨에 <b>"당뇨병이 있는 경우 섭취 전 전문가와 상담하십시오"</b>라고 표기되어 있습니다. 홍삼 제품(진홍삼 씨케이, 홍삼농축액이 들어간 침향)도 혈당에 영향을 줄 수 있어 확인이 필요합니다.',
   src:'출처: 트리플엔 맥스 상품 필수정보'},
- {when:s=>s.med==='warfarin'||s.med==='antiplatelet'||s.med==='hyperca'||s.med==='etc', hit:'chim',
+ {when:s=>s.anyMed, hit:'chim',
   t:'복용 중인 약 · 침향',
   d:'침향 라벨에 <b>"특정질환·알레르기 체질인 분은 원료성분을 확인 후 섭취하십시오"</b>라고 표기되어 있습니다. 녹용·홍삼·영지버섯·당귀·천궁·감초 등 50여 종 원료가 들어 있으니, 복용 중인 약이 있으면 원료표를 보여드리고 처방 의사·약사 확인을 안내하세요.',
   src:'출처: 자연이 만든 명작 침향 상품 필수정보'},
@@ -628,10 +640,10 @@ const RULES=[
   t:'벌 제품 알레르기 · 프로폴리스(S)',
   d:'라벨에 "프로폴리스에 알레르기를 나타내는 사람은 섭취에 주의하십시오"라고 표기되어 있습니다. <b>추천에서 제외했습니다.</b>',
   src:'출처: 엔트리 프로폴리스(S) 상품 필수정보', exclude:true},
- {when:s=>s.stomach, hit:['epi','angel','xdito','mpu'],
+ {when:s=>s.stomach, hit:['epi','angel','xdito','mpu','immunepw'],
   t:'위장이 약한 편',
   d:'해당 제품 라벨에 위장장애·소화불량 증상이 있을 경우 섭취를 중단하라고 안내되어 있습니다. 특히 <b>엑스디토는 차전자피가 물을 만나 40배 팽창</b>하므로 반드시 충분한 물과 함께 드시도록 안내하세요. <b>맨즈 파워 업</b>도 설사·위통·복부팽만 등 위장관계 장애 시 섭취를 중단하라고 안내되어 있습니다.',
-  src:'출처: 애피더스혼합유산균 · 비타엔젤 · 엑스디토 · 맨즈 파워 업 상품 필수정보'},
+  src:'출처: 애피더스혼합유산균 · 비타엔젤 · 엑스디토 · 맨즈 파워 업 · 이뮨파워 맥스 상품 필수정보'},
  {when:s=>s.preg, hit:'brainps',
   t:'임신·수유 중 · 두뇌인지 파워액티브',
   d:'엽산·비타민B군·아연은 임산부에게 필요한 성분이지만, Q&A에 <b>"포스파티딜세린 성분 때문에 섭취 전 주치의와 상담 후 섭취를 결정하십시오"</b>라고 안내되어 있습니다. 다른 제품과 달리 완전히 제외하지는 않았으니, 상담 시 주치의 확인을 꼭 안내해 주세요.',
@@ -639,12 +651,29 @@ const RULES=[
  {when:s=>s.preg, hit:'mpu',
   t:'임신·수유 중 · 맨즈 파워 업',
   d:'라벨에 <b>"어린이, 임산부 및 수유부는 섭취를 피하십시오"</b>라고 명시되어 있습니다. <b>추천에서 제외했습니다.</b>',
-  src:'출처: 엔트리 남성 건강 맨즈 파워 업 상품 필수정보', exclude:true}
+  src:'출처: 엔트리 남성 건강 맨즈 파워 업 상품 필수정보', exclude:true},
+ {when:s=>s.warfarin||s.antiplatelet, hit:'mpu',
+  t:'항응고제·항혈소판제 복용 중 · 맨즈 파워 업',
+  d:'라벨에 <b>"수술전후, 출혈성 질환이 있거나 항응고제 등 복용 시 전문가와 상담하십시오"</b>라고 표기되어 있습니다. 처방 의사·약사 확인을 먼저 안내하세요.',
+  src:'출처: 엔트리 맨즈 파워 업(R) 상품 필수정보'},
+ {when:s=>s.surgery, hit:'mpu',
+  t:'수술 예정 또는 직후 · 맨즈 파워 업',
+  d:'라벨에 <b>"수술전후 환자는 섭취에 주의하십시오"</b>라고 표기되어 있습니다. <b>추천에서 제외했습니다.</b>',
+  src:'출처: 엔트리 맨즈 파워 업(R) 상품 필수정보', exclude:true},
+ {when:s=>s.anyMed, hit:'joint',
+  t:'질환 치료 또는 약 복용 중 · 관절초',
+  d:'라벨에 <b>"질병치료나 약물투여 중인 분은 섭취 전 전문가와 상의하십시오"</b>라고 표기되어 있습니다.',
+  src:'출처: 엔트리 라이트 관절초 상품 필수정보'},
+ {when:s=>s.preg, hit:['superb','winergy'],
+  t:'임신·수유 중 · 수퍼밸런스 / 위너지',
+  d:'수퍼밸런스 라벨에 <b>"임산부와 수유부는 전문가와 상의 후 섭취"</b>, 위너지 라벨에 임산부는 <b>"섭취 전에 전문가와 상담"</b>하라고 표기되어 있습니다.',
+  src:'출처: 수퍼밸런스 · 위너지 30포 상품 필수정보'}
 ];
 const FLAGS=[['preg','임신·수유 중'],['smoke','흡연자'],['estro','에스트로겐 민감 체질'],['shell','갑각류 알레르기'],['bee','벌 제품 알레르기'],['stomach','위장이 약함'],['surgery','수술 예정·직후']];
 
 /* ══════════ UI ══════════ */
-let picked=new Set(), flags={};
+let picked=new Set(), flags={}, meds=new Set();
+const MEDS=[['warfarin','항응고제 (와파린 등)'],['antiplatelet','항혈소판제 (아스피린 등)'],['bp','혈압약'],['diabetes','당뇨병 · 당뇨약'],['hyperca','고칼슘혈증'],['etc','그 밖의 약 복용 중']];
 const chipBox=document.getElementById('chips');
 CONCERNS.forEach(c=>{
   const el=document.createElement('div');
@@ -660,11 +689,27 @@ FLAGS.forEach(([k,t])=>{
   flagBox.appendChild(el);
 });
 
+const medBox=document.getElementById('meds');
+MEDS.forEach(([k,t])=>{
+  const el=document.createElement('div');
+  el.className='ck'; el.textContent=t; el.dataset.k=k;
+  el.onclick=()=>{el.classList.toggle('on'); meds.has(k)?meds.delete(k):meds.add(k);};
+  medBox.appendChild(el);
+});
+
+/* 안내 메시지: 브라우저 알림창 대신 화면 아래에 크게 띄움 (알림창이 막힌 환경에서도 보이게) */
+function say(msg){
+  let t=document.getElementById('toast');
+  if(!t){ t=document.createElement('div'); t.id='toast'; t.setAttribute('role','alert'); document.body.appendChild(t); }
+  t.textContent=msg; t.classList.add('on');
+  clearTimeout(say._t); say._t=setTimeout(()=>t.classList.remove('on'),4500);
+}
+
 function sample(){
   document.getElementById('name').value='김영희';
   document.getElementById('age').value='57';
   document.getElementById('sex').value='여성';
-  document.getElementById('med').value='none';
+  meds=new Set(); document.querySelectorAll('#meds .ck').forEach(c=>c.classList.remove('on'));
   document.getElementById('budget').value='150000';
   document.getElementById('memo').value='새벽에 다리에 쥐가 나서 자꾸 깬다. 작년 골밀도 검사에서 주의 소견 받음.';
   picked=new Set(['bone','cramp','meno']);
@@ -672,8 +717,8 @@ function sample(){
 }
 
 function run(){
-  if(!document.getElementById('name').value.trim()){alert('고객명을 입력해 주세요.');return;}
-  if(picked.size===0){alert('건강 고민을 하나 이상 선택해 주세요.');return;}
+  if(!document.getElementById('name').value.trim()){say('고객명을 입력해 주세요.');return;}
+  if(picked.size===0){say('건강 고민을 하나 이상 선택해 주세요.');return;}
   document.getElementById('form').style.display='none';
   document.getElementById('loading').style.display='block';
   const steps=document.querySelectorAll('.step');
@@ -686,11 +731,14 @@ function build(){
   const name=document.getElementById('name').value.trim();
   const age=parseInt(document.getElementById('age').value)||50;
   const sex=document.getElementById('sex').value;
-  const med=document.getElementById('med').value;
   const budget=parseInt(document.getElementById('budget').value);
   const memo=document.getElementById('memo').value.trim();
   const cons=[...picked];
-  const state={med,preg:!!flags.preg,smoke:!!flags.smoke,shell:!!flags.shell,bee:!!flags.bee,stomach:!!flags.stomach};
+  const M=k=>meds.has(k);
+  /* drug=약을 드시는 경우(고칼슘혈증만 있는 경우 제외), anyMed=약·질환 중 하나라도 선택 */
+  const state={warfarin:M('warfarin'),antiplatelet:M('antiplatelet'),bp:M('bp'),diabetes:M('diabetes'),hyperca:M('hyperca'),etc:M('etc'),
+    drug:M('warfarin')||M('antiplatelet')||M('bp')||M('diabetes')||M('etc'), anyMed:meds.size>0,
+    preg:!!flags.preg,smoke:!!flags.smoke,estro:!!flags.estro,shell:!!flags.shell,bee:!!flags.bee,stomach:!!flags.stomach,surgery:!!flags.surgery};
 
   /* 안전 규칙 먼저 — 제외 대상 결정 */
   const fired=RULES.filter(r=>r.when(state));
@@ -705,6 +753,7 @@ function build(){
   Object.keys(score).forEach(k=>{ if(SEX_ONLY[k]&&SEX_ONLY[k]!==sex) delete score[k]; });
   /* 50세 이상: 케이2마그본이 이미 고민에 해당할 때만 가산점 (간·건강유지 등 무관한 고민에는 끼어들지 않게) */
   if(age>=50 && score.k2) score.k2+=2;
+  const cand=new Set(Object.keys(score));   /* 안전 제외 전의 추천 후보 */
   excluded.forEach(k=>delete score[k]);
   /* 원장 판매상태가 '판매중단'이면 추천에서 제외 */
   Object.keys(score).forEach(k=>{ if(P[k]&&P[k].stopped) delete score[k]; });
@@ -712,7 +761,11 @@ function build(){
   Object.keys(score).forEach(k=>{ if(P[k].device && budget<500000) delete score[k]; });
 
   let ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
-  if(ranked.length===0){alert('선택하신 조건에 맞는 제품이 없습니다. 고민 항목을 다시 확인해 주세요.');location.reload();return;}
+  if(ranked.length===0){
+    document.getElementById('loading').style.display='none';
+    document.getElementById('form').style.display='block';
+    say('선택하신 조건(성별·안전 체크·예산)에 맞는 제품이 없습니다.\n입력하신 내용은 그대로 두었어요. 건강 고민을 바꾸거나 더 골라 주세요.');
+    return;}
   /* 한 번에 권하는 제품은 최대 7가지(MAX_PICK). 20만원 이상(최고 구간)은 예산 제한 없이 7가지까지,
      그 아래 구간은 예산별 개수 제한(1·2·3가지) + 예산 초과 시 낮은 순위부터 제외. */
   const MAX_PICK = 7;
@@ -720,8 +773,11 @@ function build(){
   const max = budget<=60000?1 : budget<=100000?2 : budget<=150000?3 : MAX_PICK;
   let chosen=ranked.slice(0,Math.min(max,MAX_PICK));
   const cost=a=>a.reduce((s,k)=>s+(P[k].device?0:P[k].p),0);  /* 월 비용 — 의료기기(1회 구매)는 제외 */
+  /* 월 예산 비교는 한 달 환산 금액으로 (60일분 제품은 절반, 20일분 제품은 1.5배) */
+  const monthly=k=>P[k].device?0:(P[k].days>0?Math.round(P[k].p*30/P[k].days):P[k].p);
+  const mcost=a=>a.reduce((s,k)=>s+monthly(k),0);
   if(!isTopTier){
-    while(chosen.length>1 && cost(chosen)>budget*1.1) chosen.pop();
+    while(chosen.length>1 && mcost(chosen)>budget*1.1) chosen.pop();
   }
 
   /* 헤더 */
@@ -744,17 +800,19 @@ function build(){
         <h4>${p.n}</h4><span class="price">${p.p.toLocaleString()}원${p.device?' · 1회 구매':(p.days>0?' · '+p.days+'일분':'')}</span></div>
       <div class="ing">${p.i}</div>
       <div class="fn${p.need?' need':''}"><b>${p.need?'⚠ 확인 필요':(p.device?'의료기기 허가 사용목적':(p.general?'식품 유형':'식약처 인정 기능성'))}</b> — ${p.f}</div>
-      <div class="how">📌 ${p.device?'사용 방법: ':''}${p.h}${p.vol?'<br>📦 '+p.vol:''}</div></div>`;
+      <div class="how">📌 ${p.device?'사용 방법: ':''}${p.h}${p.vol?'<br>📦 '+p.vol:''}</div>
+      ${p.caution?`<details class="caut"><summary>⚠ 라벨 주의사항 보기</summary><div>${esc(p.caution)}</div></details>`:''}</div>`;
   }).join('');
   document.getElementById('total').innerHTML=
     (()=>{const dev=chosen.filter(k=>P[k].device), mon=chosen.filter(k=>!P[k].device);
       const row=(a,b,top)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;${top?'margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18)':''}"><span>${a}</span><b style="white-space:nowrap${top!==null&&dev.includes&&a.startsWith('+')?';font-size:22px':''}">${b}</b></div>`;
-      let t=mon.length?row(`월 예상 금액 · ${mon.length}종 패키지`,cost(mon).toLocaleString()+'원',false):'';
+      let t=mon.length?row(`첫 구매 금액 · ${mon.length}종 패키지`,cost(mon).toLocaleString()+'원',false):'';
+      if(mon.length && Math.abs(mcost(mon)-cost(mon))>=1000) t+=`<div style="width:100%;font-size:14.5px;font-weight:500;opacity:.85;margin-top:6px">한 달 기준으로 나누면 약 ${(Math.round(mcost(mon)/100)*100).toLocaleString()}원 (제품별 섭취 일수 반영)</div>`;
       dev.forEach(k=>{ t+=row(`+ 1회 구매 · ${P[k].n}<br><small style="opacity:.75">의료기기 · 월 금액과 별도</small>`,P[k].p.toLocaleString()+'원',mon.length>0); });
       return t;})();
 
   /* 안전 체크 */
-  const shown=fired.filter(r=>[].concat(r.hit).some(k=>chosen.includes(k)||excluded.has(k)));
+  const shown=fired.filter(r=>[].concat(r.hit).some(k=>chosen.includes(k)||(r.exclude&&cand.has(k))));
   const wc=document.getElementById('warnCard');
   if(shown.length===0 && age<65){ wc.style.display='none'; }
   else{
@@ -776,7 +834,7 @@ function build(){
    <div class="lcard"><div class="ic">🧘</div><h4>휴식·명상 가이드</h4><ul>${uq(m2).map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
 
   /* 스크립트 */
-  const sctx={shown,excluded,med};
+  const sctx={shown,excluded,hasMed:state.anyMed};
   document.getElementById('script').innerHTML=script(name,age,sex,cons,chosen,memo,sctx);
   document.getElementById('smemo').innerHTML=scriptMemo(cons,chosen,age,sctx);
 
@@ -809,11 +867,12 @@ function build(){
     else merged.push({d:item.d, a:item.a});
   });
 
+  const dstr=n=>{const t=new Date();t.setDate(t.getDate()+n);return (t.getMonth()+1)+'월 '+t.getDate()+'일('+'일월화수목금토'[t.getDay()]+')';};
   document.getElementById('cal').innerHTML=merged.map(item=>
-    `<div class="crow"><div class="cday">D+${item.d}</div><div class="cact">${item.a}</div></div>`).join('');
+    `<div class="crow"><div class="cday">D+${item.d}<small>${dstr(item.d)}</small></div><div class="cact">${item.a}</div></div>`).join('');
 
   document.getElementById('foot').innerHTML=
-    `※ 제품명·가격·원료·기능성 문구·주의사항은 하이리빙 공식몰(hiliving.co.kr) 상품 상세정보에서 2026년 7월 29일 수집한 내용입니다. 가격은 변동될 수 있습니다.<br>
+    `※ 제품명·가격·원료·기능성 문구·주의사항은 하이리빙 제품 원장(${LEDGER.at} 기준)과 공식몰(hiliving.co.kr) 상품 상세정보를 따릅니다. 가격은 변동될 수 있습니다.<br>
      ※ 건강기능식품은 질병의 예방 및 치료를 위한 의약품이 아닙니다. 질환이 있거나 약을 복용 중인 고객은 반드시 의사·약사와 상담하도록 안내하세요.<br>
      ※ 본 화면의 추천은 상담 보조 도구이며 진단이나 처방이 아닙니다.${chosen.some(k=>P[k].device)?'<br>※ 라파 402 VIP는 의료기기(제허 04-1227호)입니다. 허가받은 사용목적 외의 효능은 말할 수 없으며, 질환 치료 중인 고객은 담당 의사와 상의하도록 안내하세요.':''}`;
 
@@ -958,7 +1017,7 @@ function script(name,age,sex,cons,chosen,memo,ctx){
   const devs=chosen.filter(k=>P[k].device), mons=chosen.filter(k=>!P[k].device);
   if(mons.length>1){
     const total=mons.reduce((a,k)=>a+P[k].p,0);
-    s+=`${devs.length?'매달 드시는 제품만 보면 ':'전체로 보면 '}${mons.length}종에 월 ${won(total)}, 하루로 나누면 약 ${won(perDay(mons))}꼴이에요.`;
+    s+=`${devs.length?'매달 드시는 제품만 보면 ':'전체로 보면 '}${mons.length}종 첫 구매 금액이 ${won(total)}, 하루로 나누면 약 ${won(perDay(mons))}꼴이에요.`;
     if(mons.length>2) s+=` 부담되시면 <span class="hl">1·2순위부터</span> 시작하셔도 되는데, 그러면 하루 약 ${won(perDay(mons.slice(0,2)))}이에요.`;
     s+='\n';
   } else if(mons.length===1) s+=`${P[mons[0]].n}${jEun(P[mons[0]].n)} 하루로 나누면 약 ${won(perDay(mons))}이에요.\n`;
@@ -968,7 +1027,7 @@ function script(name,age,sex,cons,chosen,memo,ctx){
   /* 안전 확인 */
   const shown=ctx.shown||[];
   const ex=shown.filter(r=>r.exclude), sh=shown.filter(r=>!r.exclude);
-  const hasMed=ctx.med&&ctx.med!=='none';
+  const hasMed=!!ctx.hasMed;
   if(ex.length||sh.length||hasMed||age>=65){
     s+='한 가지만 먼저 확인할게요. ';
     if(hasMed) s+='지금 드시는 약이 있다고 하셨으니, 약 이름을 알려 주시면 제품 라벨과 같이 확인하고 필요하면 약사님께 여쭤보시도록 안내드릴게요. ';
@@ -1049,10 +1108,10 @@ function copyScript(){
      3) 직접 길게 눌러 복사할 수 있는 선택창을 띄워 100% 복사 가능하게 함 */
   if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
     navigator.clipboard.writeText(text)
-      .then(()=>alert('상담 스크립트가 복사되었습니다.'))
-      .catch(()=>{ if(legacyCopy()) alert('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text); });
+      .then(()=>say('상담 스크립트가 복사되었습니다.'))
+      .catch(()=>{ if(legacyCopy()) say('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text); });
   } else {
-    if(legacyCopy()) alert('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text);
+    if(legacyCopy()) say('상담 스크립트가 복사되었습니다.'); else showManualCopyBox(text);
   }
 }
 

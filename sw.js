@@ -1,5 +1,5 @@
 /* 하이닥터 AI 서비스워커 — 앱 껍데기를 저장해 두어 다음부터 빠르게 열림. 업데이트 시 VERSION만 올리면 됨 */
-const VERSION='hidoctor-v1';
+const VERSION='hidoctor-v2';
 const SHELL=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
